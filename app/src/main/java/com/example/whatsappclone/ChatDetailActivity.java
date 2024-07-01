@@ -43,7 +43,6 @@ public class ChatDetailActivity extends AppCompatActivity {
 
 
     private final static int REQUEST_CAMERA_PERMISSION = 111;
-    private final static int REQUEST_IMAGE_CAPTURE = 222;
     ActivityResultLauncher<Intent> launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
         @Override
         public void onActivityResult(ActivityResult result) {
@@ -113,6 +112,7 @@ public class ChatDetailActivity extends AppCompatActivity {
                         messagesModel.clear();
                         for (DataSnapshot ds : snapshot.getChildren()) {
                             MessageModel model = ds.getValue(MessageModel.class);
+                            assert model != null;
                             model.setMessageId(ds.getKey());
                             messagesModel.add(model);
                         }
@@ -161,7 +161,6 @@ public class ChatDetailActivity extends AppCompatActivity {
             }
         });
 
-
         imgBackArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -200,12 +199,7 @@ public class ChatDetailActivity extends AppCompatActivity {
         });
 
 
-        imgCamera.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CaptureImage(v);
-            }
-        });
+        imgCamera.setOnClickListener(this::CaptureImage);
 
 
     }

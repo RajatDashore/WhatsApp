@@ -156,7 +156,7 @@ public class ChatDetailActivity extends AppCompatActivity {
                             });
 
                 } else {
-                    edtChatting.setError("Message can't be sent");
+                    edtChatting.setError("Message can't be send");
                 }
             }
         });

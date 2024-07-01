@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    	
+    <dimen name="sp1">1.1389sp</dimen>
+    	
+    <dimen name="sp2">2.2778sp</dimen>
+    	
+    <dimen name="sp3">3.4167sp</dimen>
+    	
+    <dimen name="sp4">4.5556sp</dimen>
+    	
+    <dimen name="sp5">5.6944sp</dimen>
+    	
+    <dimen name="sp6">6.8333sp</dimen>
+    	
+    <dimen name="sp7">7.9722sp</dimen>
+    	
+    <dimen name="sp8">9.1111sp</dimen>
+    	
+    <dimen name="sp9">10.2500sp</dimen>
+    	
+    <dimen name="sp10">11.3889sp</dimen>
+    	
+    <dimen name="sp11">12.5278sp</dimen>
+    	
+    <dimen name="sp12">13.6667sp</dimen>
+    	
+    <dimen name="sp13">14.8056sp</dimen>
+    	
+    <dimen name="sp14">15.9444sp</dimen>
+    	
+    <dimen name="sp15">17.0833sp</dimen>
+    	
+    <dimen name="sp16">18.2222sp</dimen>
+    	
+    <dimen name="sp17">19.3611sp</dimen>
+    	
+    <dimen name="sp18">20.5000sp</dimen>
+    	
+    <dimen name="sp19">21.6389sp</dimen>
+    	
+    <dimen name="sp20">22.7778sp</dimen>
+    	
+    <dimen name="sp21">23.9167sp</dimen>
+    	
+    <dimen name="sp22">25.0556sp</dimen>
+    	
+    <dimen name="sp23">26.1944sp</dimen>
+    	
+    <dimen name="sp24">27.3333sp</dimen>
+    	
+    <dimen name="sp25">28.4722sp</dimen>
+    	
+    <dimen name="sp26">29.6111sp</dimen>
+    	
+    <dimen name="sp27">30.7500sp</dimen>
+    	
+    <dimen name="sp28">31.8889sp</dimen>
+    	
+    <dimen name="sp29">33.0278sp</dimen>
+    	
+    <dimen name="sp30">34.1667sp</dimen>
+    	
+    <dimen name="sp31">35.3056sp</dimen>
+    	
+    <dimen name="sp32">36.4444sp</dimen>
+    	
+    <dimen name="sp33">37.5833sp</dimen>
+    	
+    <dimen name="sp34">38.7222sp</dimen>
+    	
+    <dimen name="sp35">39.8611sp</dimen>
+    	
+    <dimen name="sp36">41.0000sp</dimen>
+    	
+    <dimen name="sp37">42.1389sp</dimen>
+    	
+    <dimen name="sp38">43.2778sp</dimen>
+    	
+    <dimen name="sp39">44.4167sp</dimen>
+    	
+    <dimen name="sp40">45.5556sp</dimen>
+    	
+    <dimen name="sp41">46.6944sp</dimen>
+    	
+    <dimen name="sp42">47.8333sp</dimen>
+    	
+    <dimen name="sp43">48.9722sp</dimen>
+    	
+    <dimen name="sp44">50.1111sp</dimen>
+    	
+    <dimen name="sp45">51.2500sp</dimen>
+    	
+    <dimen name="sp46">52.3889sp</dimen>
+    	
+    <dimen name="sp47">53.5278sp</dimen>
+    	
+    <dimen name="sp48">54.6667sp</dimen>
+    	
+    <dimen name="sp49">55.8056sp</dimen>
+    	
+    <dimen name="sp50">56.9444sp</dimen>
+    	
+    <dimen name="sp51">58.0833sp</dimen>
+    	
+    <dimen name="sp52">59.2222sp</dimen>
+    	
+    <dimen name="sp53">60.3611sp</dimen>
+    	
+    <dimen name="sp54">61.5000sp</dimen>
+    	
+    <dimen name="sp55">62.6389sp</dimen>
+    	
+    <dimen name="sp56">63.7778sp</dimen>
+    	
+    <dimen name="sp57">64.9167sp</dimen>
+    	
+    <dimen name="sp58">66.0556sp</dimen>
+    	
+    <dimen name="sp59">67.1944sp</dimen>
+    	
+    <dimen name="sp60">68.3333sp</dimen>
+    	
+    <dimen name="sp61">69.4722sp</dimen>
+    	
+    <dimen name="sp62">70.6111sp</dimen>
+    	
+    <dimen name="sp63">71.7500sp</dimen>
+    	
+    <dimen name="sp64">72.8889sp</dimen>
+    	
+    <dimen name="sp65">74.0278sp</dimen>
+    	
+    <dimen name="sp66">75.1667sp</dimen>
+    	
+    <dimen name="sp67">76.3056sp</dimen>
+    	
+    <dimen name="sp68">77.4444sp</dimen>
+    	
+    <dimen name="sp69">78.5833sp</dimen>
+    	
+    <dimen name="sp70">79.7222sp</dimen>
+    	
+    <dimen name="sp71">80.8611sp</dimen>
+    	
+    <dimen name="sp72">82.0000sp</dimen>
+    	
+    <dimen name="sp73">83.1389sp</dimen>
+    	
+    <dimen name="sp74">84.2778sp</dimen>
+    	
+    <dimen name="sp75">85.4167sp</dimen>
+    	
+    <dimen name="sp76">86.5556sp</dimen>
+    	
+    <dimen name="sp77">87.6944sp</dimen>
+    	
+    <dimen name="sp78">88.8333sp</dimen>
+    	
+    <dimen name="sp79">89.9722sp</dimen>
+    	
+    <dimen name="sp80">91.1111sp</dimen>
+    	
+    <dimen name="sp81">92.2500sp</dimen>
+    	
+    <dimen name="sp82">93.3889sp</dimen>
+    	
+    <dimen name="sp83">94.5278sp</dimen>
+    	
+    <dimen name="sp84">95.6667sp</dimen>
+    	
+    <dimen name="sp85">96.8056sp</dimen>
+    	
+    <dimen name="sp86">97.9444sp</dimen>
+    	
+    <dimen name="sp87">99.0833sp</dimen>
+    	
+    <dimen name="sp88">100.2222sp</dimen>
+    	
+    <dimen name="sp89">101.3611sp</dimen>
+    	
+    <dimen name="sp90">102.5000sp</dimen>
+    	
+    <dimen name="sp91">103.6389sp</dimen>
+    	
+    <dimen name="sp92">104.7778sp</dimen>
+    	
+    <dimen name="sp93">105.9167sp</dimen>
+    	
+    <dimen name="sp94">107.0556sp</dimen>
+    	
+    <dimen name="sp95">108.1944sp</dimen>
+    	
+    <dimen name="sp96">109.3333sp</dimen>
+    	
+    <dimen name="sp97">110.4722sp</dimen>
+    	
+    <dimen name="sp98">111.6111sp</dimen>
+    	
+    <dimen name="sp99">112.7500sp</dimen>
+    	
+    <dimen name="sp100">113.8889sp</dimen>
+</resources>

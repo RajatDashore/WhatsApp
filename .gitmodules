@@ -1,0 +1,3 @@
+[submodule "WhatsApp"]
+	path = WhatsApp
+	url = https://github.com/RajatDashore/WhatsApp.git

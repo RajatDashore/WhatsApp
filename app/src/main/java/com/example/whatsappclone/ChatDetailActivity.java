@@ -79,12 +79,26 @@ public class ChatDetailActivity extends AppCompatActivity {
         ImageView imgDoller = findViewById(R.id.imgDolar);
         ImageView imgCamera = findViewById(R.id.imgCamera);
         chatRecyclerView = findViewById(R.id.chatRecylcerView);
+        ImageView videoCallBtn = findViewById(R.id.videoCall);
         edtChatting.setBackground(getDrawable(android.R.drawable.screen_background_light_transparent));
 
         final String senderId = auth.getUid();
         String recieveid = getIntent().getStringExtra("UserId");
         String username = getIntent().getStringExtra("userName");
         String propicture = getIntent().getStringExtra("proPicture");
+
+
+        videoCallBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ChatDetailActivity.this, VideoCallOutgoing.class);
+                intent.putExtra("ProPicture", propicture);
+                intent.putExtra("uId", recieveid);
+                intent.putExtra("Name", username);
+                startActivity(intent);
+
+            }
+        });
 
 
         userName.setText(username);

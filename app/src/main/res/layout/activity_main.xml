@@ -25,7 +25,7 @@
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_56sdp"
-        android:background="@color/tealLightGreen"
+        android:background="@color/white"
         android:contentDescription="@string/dasda"
         android:elevation="@dimen/_10sdp"
         android:padding="@dimen/_5sdp"
@@ -37,7 +37,7 @@
         app:tabIndicator="@color/black"
         app:tabMaxWidth="0dp"
         app:tabMode="fixed"
-        app:tabSelectedTextColor="@color/white"
+        app:tabSelectedTextColor="@color/green"
         app:tabTextColor="@color/black" />
 
 

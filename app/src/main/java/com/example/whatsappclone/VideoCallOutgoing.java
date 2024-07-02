@@ -2,7 +2,6 @@ package com.example.whatsappclone;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -71,22 +70,13 @@ public class VideoCallOutgoing extends AppCompatActivity {
                         }
                     });
 
-
-            sendCallInvitation();
-
             return insets;
         });
     }
 
-    private void sendCallInvitation() {
 
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-            }
-        }, 3000);
-
-    }
 }
+
+
+
+

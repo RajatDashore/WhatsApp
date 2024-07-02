@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -91,11 +92,13 @@ public class ChatDetailActivity extends AppCompatActivity {
         videoCallBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ChatDetailActivity.this, VideoCallOutgoing.class);
-                intent.putExtra("ProPicture", propicture);
-                intent.putExtra("uId", recieveid);
-                intent.putExtra("Name", username);
-                startActivity(intent);
+//                Intent intent = new Intent(ChatDetailActivity.this, VideoCallOutgoing.class);
+//                intent.putExtra("ProPicture", propicture);
+//                intent.putExtra("uId", recieveid);
+//                intent.putExtra("Name", username);
+//                startActivity(intent);
+
+                Toast.makeText(ChatDetailActivity.this, "Work in progress", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -108,6 +111,13 @@ public class ChatDetailActivity extends AppCompatActivity {
             senderNode = FirebaseAuth.getInstance().getUid() + recieveid;
             recieverNode = recieveid + FirebaseAuth.getInstance().getUid();
         }
+        ImageView call = findViewById(R.id.imageView5);
+        call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ChatDetailActivity.this, "Work in progress", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
         final ArrayList<MessageModel> messagesModel = new ArrayList<>();
@@ -215,7 +225,6 @@ public class ChatDetailActivity extends AppCompatActivity {
 
         imgCamera.setOnClickListener(this::CaptureImage);
 
-
     }
 
     public void CaptureImage(View View) {
@@ -229,5 +238,12 @@ public class ChatDetailActivity extends AppCompatActivity {
             launcher.launch(i);
         }
     }
+
+//    private void showUserDetail(View view) {
+//        View layout = new View(this);
+//        layout = findViewById(R.id.layoutShow);
+//        layout.setVisibility(View.VISIBLE);
+//        layout.setActivated(true);
+//    }
 
 }

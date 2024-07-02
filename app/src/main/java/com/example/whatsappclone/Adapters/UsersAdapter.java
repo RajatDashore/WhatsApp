@@ -16,6 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.whatsappclone.BlockedContacts;
 import com.example.whatsappclone.ChatDetailActivity;
 import com.example.whatsappclone.Modules.MessageModel;
 import com.example.whatsappclone.Modules.Users;
@@ -116,6 +117,10 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.MyViewHolder
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 holder.itemView.setVisibility(View.GONE);
+                                Intent i = new Intent(context, BlockedContacts.class);
+                                i.putExtra("name", users.getUserName());
+                                i.putExtra("pro", users.getProPicture());
+                                context.startActivity(i);
                             }
                         })
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

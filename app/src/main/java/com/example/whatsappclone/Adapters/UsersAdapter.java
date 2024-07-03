@@ -1,5 +1,6 @@
 package com.example.whatsappclone.Adapters;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -16,9 +17,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.whatsappclone.BlockedContacts;
 import com.example.whatsappclone.ChatDetailActivity;
-import com.example.whatsappclone.Modules.MessageModel;
+import com.example.whatsappclone.DataBase;
+import com.example.whatsappclone.DataBaseHelper;
 import com.example.whatsappclone.Modules.Users;
 import com.example.whatsappclone.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,13 +36,16 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.MyViewHolder> {
     private final Context context;
     private final ArrayList<Users> list;
+    private final DataBase database;
+    private final DataBaseHelper helper;
     private int lastPosition = -1;
 
     public UsersAdapter(Context context, ArrayList<Users> list) {
         this.context = context;
         this.list = list;
+        this.database = DataBase.getInstance(context);
+        this.helper = new DataBaseHelper();
     }
-
 
     @NonNull
     @Override
@@ -51,24 +55,19 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.MyViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Users users = list.get(position);
-        MessageModel model = new MessageModel();
         holder.name.setText(users.getUserName());
-        //holder.time.setText(model.getTimeStamp().toString());
         RvAnimation(holder.itemView, position);
 
         Picasso.get().load(users.getProPicture()).placeholder(R.drawable.person).into(holder.imageView);
-        // holder.lastMessage.setText(users.getLastMessage());
+
         FirebaseDatabase.getInstance().getReference().child("Messages").child(FirebaseAuth.getInstance().getUid() + users.getUserId()).orderByChild("timeStamp").limitToLast(1).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.hasChildren()) {
                     for (DataSnapshot ds : snapshot.getChildren()) {
                         holder.lastMessage.setText(ds.child("message").getValue(String.class));
-//                        Date date = new Date(ds.child("timeStamp").getValue(Long.class));
-//                        SimpleDateFormat f = new SimpleDateFormat("h:mm a");
-//                        holder.time.setText(f.format(date));
                     }
                 }
             }
@@ -78,7 +77,6 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.MyViewHolder
                 holder.lastMessage.setText("Error");
             }
         });
-
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,16 +92,6 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.MyViewHolder
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Dialog dialog = new Dialog(context);
-//                  dialog.setContentView(R.layout.activity_captured_image);
-//                dialog.setContentView(R.layout.activity_captured_image);
-//                Picasso.get().load(users.getProPicture()).placeholder(R.drawable.person).into(holder.CapImage);
-//                Animation au = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
-//                au.setDuration(2000);
-//                holder.CapImage.startAnimation(au);
-//                dialog.setCancelable(true);
-//                holder.CapImage.setAnimation(null);
-//                dialog.show();
                 Toast.makeText(context, "Work in Progress", Toast.LENGTH_SHORT).show();
             }
         });
@@ -111,16 +99,22 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.MyViewHolder
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                new AlertDialog.Builder(context).
-                        setTitle("Block contect")
-                        .setMessage("Do you want to block").setPositiveButton("Block", new DialogInterface.OnClickListener() {
+                new AlertDialog.Builder(context)
+                        .setTitle("Block contact")
+                        .setMessage("Do you want to block?")
+                        .setPositiveButton("Block", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                holder.itemView.setVisibility(View.GONE);
-                                Intent i = new Intent(context, BlockedContacts.class);
-                                i.putExtra("name", users.getUserName());
-                                i.putExtra("pro", users.getProPicture());
-                                context.startActivity(i);
+                                // Remove user from list and notify adapter
+                                list.remove(position);
+                                notifyItemRemoved(position);
+                                notifyItemRangeChanged(position, list.size());
+
+                                // Add user to database
+                                helper.setName(users.getUserName());
+                                helper.setEmail(users.getMail());
+                                helper.setImage(users.getProPicture());
+                                database.UserDao().insert(helper);
                             }
                         })
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -130,11 +124,9 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.MyViewHolder
                             }
                         }).show();
 
-                return false;
+                return true;
             }
         });
-
-
     }
 
     @Override
@@ -146,7 +138,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.MyViewHolder
         Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.fade_in);
         if (position > lastPosition) {
             lastPosition = position;
-            animation.setDuration(1500);
+            animation.setDuration(500);  // Reduced duration
             view.startAnimation(animation);
         }
     }

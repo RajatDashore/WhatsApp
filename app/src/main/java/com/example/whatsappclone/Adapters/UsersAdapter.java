@@ -115,6 +115,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.MyViewHolder
                                 helper.setEmail(users.getMail());
                                 helper.setImage(users.getProPicture());
                                 database.UserDao().insert(helper);
+                                Toast.makeText(context, "User added in DataBasThe", Toast.LENGTH_SHORT).show();
                             }
                         })
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

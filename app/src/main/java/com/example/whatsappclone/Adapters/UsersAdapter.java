@@ -29,6 +29,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -62,21 +63,28 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.MyViewHolder
 
         Picasso.get().load(users.getProPicture()).placeholder(R.drawable.person).into(holder.imageView);
 
-        FirebaseDatabase.getInstance().getReference().child("Messages").child(FirebaseAuth.getInstance().getUid() + users.getUserId()).orderByChild("timeStamp").limitToLast(1).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.hasChildren()) {
-                    for (DataSnapshot ds : snapshot.getChildren()) {
-                        holder.lastMessage.setText(ds.child("message").getValue(String.class));
+        FirebaseDatabase.getInstance().getReference().child("Messages")
+                .child(FirebaseAuth.getInstance().getUid() + users.getUserId())
+                .orderByChild("timeStamp")
+                .limitToLast(1)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.hasChildren()) {
+                            for (DataSnapshot ds : snapshot.getChildren()) {
+                                holder.lastMessage.setText(ds.child("message").getValue(String.class));
+                                SimpleDateFormat sd = new SimpleDateFormat("h:MM aaa");
+                                Long times = ds.child("timeStamp").getValue(Long.class);
+                                holder.time.setText(sd.format(times));
+                            }
+                        }
                     }
-                }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                holder.lastMessage.setText("Error");
-            }
-        });
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        holder.lastMessage.setText("Error");
+                    }
+                });
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

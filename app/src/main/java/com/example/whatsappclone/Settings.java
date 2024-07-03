@@ -84,7 +84,6 @@ public class Settings extends AppCompatActivity {
                 Toast.makeText(Settings.this, "Work in progress", Toast.LENGTH_SHORT).show();
             }
         });
-
         ConstraintLayout consAvatar = new ConstraintLayout(this);
         consAvatar.setOnClickListener(new View.OnClickListener() {
             @Override

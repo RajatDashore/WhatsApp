@@ -57,19 +57,22 @@
         android:id="@+id/SampleTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_5sdp"
-        android:text="10:10"
-        android:visibility="gone"
+        android:padding="@dimen/_3sdp"
+        android:text="10:10jhdfjhsdfjdsf"
+        android:textSize="@dimen/_8ssp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/guideline4"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="@dimen/_40sdp" />
+        app:layout_constraintGuide_end="@dimen/_60sdp" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier2"

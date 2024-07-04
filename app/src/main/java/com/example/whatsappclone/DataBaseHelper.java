@@ -12,8 +12,11 @@ import java.io.Serializable;
 @SuppressLint("RestrictedApi")
 @Entity(tableName = "blockedcontacts")
 public class DataBaseHelper implements Serializable {
+
     @PrimaryKey(autoGenerate = true)
-    int id = 0;
+    int id;
+    @ColumnInfo(name = "Uid")
+    String Uid;
     @ColumnInfo(name = "name")
     String name;
     @ColumnInfo(name = "image")
@@ -21,12 +24,21 @@ public class DataBaseHelper implements Serializable {
     @ColumnInfo(name = "email")
     String Email;
 
-    public int getId() {
-        return id;
+
+    public String getUId() {
+        return Uid;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getUid() {
+        return Uid;
+    }
+
+    public void setUid(String uid) {
+        Uid = uid;
     }
 
     public String getName() {
@@ -52,5 +64,4 @@ public class DataBaseHelper implements Serializable {
     public void setEmail(String email) {
         Email = email;
     }
-
 }

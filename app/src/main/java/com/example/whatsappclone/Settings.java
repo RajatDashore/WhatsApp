@@ -81,9 +81,11 @@ public class Settings extends AppCompatActivity {
         layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(Settings.this, "Work in progress", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(Settings.this, BlockedContacts.class));
             }
         });
+
+
         ConstraintLayout consAvatar = new ConstraintLayout(this);
         consAvatar.setOnClickListener(new View.OnClickListener() {
             @Override

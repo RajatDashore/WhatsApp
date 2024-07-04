@@ -1,8 +1,6 @@
 package com.example.whatsappclone;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,49 +11,42 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.whatsappclone.Adapters.BlockedAdapter;
-import com.squareup.picasso.Picasso;
 
-import de.hdodenhof.circleimageview.CircleImageView;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class BlockedContacts extends AppCompatActivity {
-    private CircleImageView image;
-    private TextView Username;
+    private final List<DataBaseHelper> list = new ArrayList<>();
     private RecyclerView blockedRecyView;
-    private DataBase database;
-    private DataBaseHelper helper;
     private BlockedAdapter blockedAdapter;
+
+    public BlockedContacts() {
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_blocked_contacts);
-        getSupportActionBar().hide();
+        Objects.requireNonNull(getSupportActionBar()).hide();
+
+        // Find the root view and apply window insets
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            Username = findViewById(R.id.blockedName);
-            image = findViewById(R.id.blockedImage);
-            Intent i = getIntent();
-            String name = i.getStringExtra("name");
-            String pro = i.getStringExtra("pro");
-            Username.setText(name);
-
-
-            blockedRecyView = findViewById(R.id.blockedRecyclerView);
-            updadeRecyView();
-            Picasso.get().load(pro).placeholder(R.drawable.person).into(image);
-
-
-            return insets;
+            return WindowInsetsCompat.CONSUMED;
         });
-    }
 
-    private void updadeRecyView() {
-        blockedRecyView.setHasFixedSize(true);
-        blockedAdapter = new BlockedAdapter(this);
+        // Initialize RecyclerView and Adapter
+        blockedRecyView = findViewById(R.id.blockedRecyclerView);
+
+        // Getting data from the DataBase and sending it to BlockedAdapter to show on RecyclerView
+        // list = DataBase.getInstance(BlockedContacts.this).UserDao().getlist();
+        blockedAdapter = new BlockedAdapter(this, list);
         blockedRecyView.setAdapter(blockedAdapter);
         LinearLayoutManager lm = new LinearLayoutManager(this);
+        lm.setOrientation(RecyclerView.VERTICAL);
         blockedRecyView.setLayoutManager(lm);
     }
 }

@@ -20,7 +20,7 @@ public interface DataBaseDAO {
     @Delete
     void delete(DataBaseHelper helper);
 
-//    @Query("UPDATE blockedcontacts SET name = :name, email = email , WHERE id")
-//    void update (int id,String name,String email,String image);
+    @Query(" UPDATE blockedcontacts SET name = :name, email = :email, image = :image, Uid = :Uid WHERE iD = :id ")
+    void update(String Uid, int id, String name, String email, String image);
 
 }

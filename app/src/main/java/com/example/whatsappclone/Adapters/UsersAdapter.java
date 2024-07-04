@@ -41,11 +41,11 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.MyViewHolder
     private final DataBaseHelper helper;
     private int lastPosition = -1;
 
-    public UsersAdapter(Context context, ArrayList<Users> list) {
+    public UsersAdapter(Context context, ArrayList<Users> list, DataBase database, DataBaseHelper helper) {
         this.context = context;
         this.list = list;
-        this.database = DataBase.getInstance(context);
-        this.helper = new DataBaseHelper();
+        this.database = database;
+        this.helper = helper;
     }
 
     @NonNull
@@ -63,28 +63,24 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.MyViewHolder
 
         Picasso.get().load(users.getProPicture()).placeholder(R.drawable.person).into(holder.imageView);
 
-        FirebaseDatabase.getInstance().getReference().child("Messages")
-                .child(FirebaseAuth.getInstance().getUid() + users.getUserId())
-                .orderByChild("timeStamp")
-                .limitToLast(1)
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (snapshot.hasChildren()) {
-                            for (DataSnapshot ds : snapshot.getChildren()) {
-                                holder.lastMessage.setText(ds.child("message").getValue(String.class));
-                                SimpleDateFormat sd = new SimpleDateFormat("h:MM aaa");
-                                Long times = ds.child("timeStamp").getValue(Long.class);
-                                holder.time.setText(sd.format(times));
-                            }
-                        }
+        FirebaseDatabase.getInstance().getReference().child("Messages").child(FirebaseAuth.getInstance().getUid() + users.getUserId()).orderByChild("timeStamp").limitToLast(1).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.hasChildren()) {
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        holder.lastMessage.setText(ds.child("message").getValue(String.class));
+                        SimpleDateFormat sd = new SimpleDateFormat("h:MM aaa");
+                        Long times = ds.child("timeStamp").getValue(Long.class);
+                        holder.time.setText(sd.format(times));
                     }
+                }
+            }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        holder.lastMessage.setText("Error");
-                    }
-                });
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                holder.lastMessage.setText("Error");
+            }
+        });
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,31 +103,29 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.MyViewHolder
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                new AlertDialog.Builder(context)
-                        .setTitle("Block contact")
-                        .setMessage("Do you want to block?")
-                        .setPositiveButton("Block", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                // Remove user from list and notify adapter
-                                list.remove(position);
-                                notifyItemRemoved(position);
-                                notifyItemRangeChanged(position, list.size());
+                new AlertDialog.Builder(context).setTitle("Block contact").setMessage("Do you want to block?").setPositiveButton("Block", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Remove user from list and notify adapter
+                        list.remove(position);
+                        notifyItemRemoved(position);
+                        notifyItemRangeChanged(position, list.size());
 
-                                // Add user to database
-                                helper.setName(users.getUserName());
-                                helper.setEmail(users.getMail());
-                                helper.setImage(users.getProPicture());
-                                database.UserDao().insert(helper);
-                                Toast.makeText(context, "User added in DataBasThe", Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        }).show();
+                        // Add user to database
+                        helper.setName(users.getUserName());
+                        helper.setUid(users.getUserId());
+                        helper.setEmail(users.getMail());
+                        helper.setImage(users.getProPicture());
+                        database.UserDao().insert(helper);
+
+                        Toast.makeText(context, "User added in DataBase", Toast.LENGTH_SHORT).show();
+                    }
+                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).show();
 
                 return true;
             }

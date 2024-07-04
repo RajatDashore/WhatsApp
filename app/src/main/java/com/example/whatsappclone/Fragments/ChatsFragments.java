@@ -42,9 +42,9 @@ public class ChatsFragments extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        com.example.whatsappclone.databinding.FragmentChatsFragmentsBinding binding = FragmentChatsFragmentsBinding.inflate(inflater, container, false);
+        FragmentChatsFragmentsBinding binding = FragmentChatsFragmentsBinding.inflate(inflater, container, false);
         DataBase database1 = DataBase.getInstance(ChatsFragments.this);
-        DataBaseHelper helper = (DataBaseHelper) database1.UserDao().getlist();
+        DataBaseHelper helper = new DataBaseHelper();
         usersAdapter = new UsersAdapter(getContext(), list, database1, helper);
         binding.chatRecyclerViewFragments.setAdapter(usersAdapter);
         FirebaseDatabase Fdatabase = FirebaseDatabase.getInstance();

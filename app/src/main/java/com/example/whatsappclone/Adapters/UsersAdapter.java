@@ -3,7 +3,6 @@ package com.example.whatsappclone.Adapters;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +30,8 @@ import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -63,49 +64,48 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.MyViewHolder
 
         Picasso.get().load(users.getProPicture()).placeholder(R.drawable.person).into(holder.imageView);
 
-        FirebaseDatabase.getInstance().getReference().child("Messages").child(FirebaseAuth.getInstance().getUid() + users.getUserId()).orderByChild("timeStamp").limitToLast(1).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.hasChildren()) {
-                    for (DataSnapshot ds : snapshot.getChildren()) {
-                        holder.lastMessage.setText(ds.child("message").getValue(String.class));
-                        SimpleDateFormat sd = new SimpleDateFormat("h:MM aaa");
-                        Long times = ds.child("timeStamp").getValue(Long.class);
-                        holder.time.setText(sd.format(times));
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                holder.lastMessage.setText("Error");
-            }
-        });
-
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(context, ChatDetailActivity.class);
-                i.putExtra("userName", users.getUserName());
-                i.putExtra("proPicture", users.getProPicture());
-                i.putExtra("UserId", users.getUserId());
-                context.startActivity(i);
-            }
-        });
-
-        holder.imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context, "Work in Progress", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                new AlertDialog.Builder(context).setTitle("Block contact").setMessage("Do you want to block?").setPositiveButton("Block", new DialogInterface.OnClickListener() {
+        FirebaseDatabase.getInstance().getReference().child("Messages")
+                .child(FirebaseAuth.getInstance().getUid() + users.getUserId())
+                .orderByChild("timeStamp")
+                .limitToLast(1)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.hasChildren()) {
+                            for (DataSnapshot ds : snapshot.getChildren()) {
+                                holder.lastMessage.setText(ds.child("message").getValue(String.class));
+                                Long timestamp = ds.child("timeStamp").getValue(Long.class);
+                                if (timestamp != null) {
+                                    @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("h:mm aaa", Locale.getDefault());
+                                    holder.time.setText(sdf.format(new Date(timestamp)));
+                                } else {
+                                    holder.time.setText("");
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        holder.lastMessage.setText("Error");
+                    }
+                });
+
+        holder.itemView.setOnClickListener(v -> {
+            Intent i = new Intent(context, ChatDetailActivity.class);
+            i.putExtra("userName", users.getUserName());
+            i.putExtra("proPicture", users.getProPicture());
+            i.putExtra("UserId", users.getUserId());
+            context.startActivity(i);
+        });
+
+        holder.imageView.setOnClickListener(v -> Toast.makeText(context, "Work in Progress", Toast.LENGTH_SHORT).show());
+
+        holder.itemView.setOnLongClickListener(v -> {
+            new AlertDialog.Builder(context)
+                    .setTitle("Block contact")
+                    .setMessage("Do you want to block?")
+                    .setPositiveButton("Block", (dialog, which) -> {
                         // Remove user from list and notify adapter
                         list.remove(position);
                         notifyItemRemoved(position);
@@ -119,16 +119,11 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.MyViewHolder
                         database.UserDao().insert(helper);
 
                         Toast.makeText(context, "User added in DataBase", Toast.LENGTH_SHORT).show();
-                    }
-                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                }).show();
+                    })
+                    .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
+                    .show();
 
-                return true;
-            }
+            return true;
         });
     }
 
@@ -137,7 +132,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.MyViewHolder
         return list.size();
     }
 
-    public void RvAnimation(View view, int position) {
+    private void RvAnimation(View view, int position) {
         Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.fade_in);
         if (position > lastPosition) {
             lastPosition = position;

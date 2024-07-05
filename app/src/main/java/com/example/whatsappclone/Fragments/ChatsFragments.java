@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.whatsappclone.Adapters.UsersAdapter;
+import com.example.whatsappclone.BlockedContacts;
 import com.example.whatsappclone.DataBase;
 import com.example.whatsappclone.DataBaseHelper;
 import com.example.whatsappclone.Modules.Users;
@@ -44,8 +45,12 @@ public class ChatsFragments extends Fragment {
         // Inflate the layout for this fragment
         FragmentChatsFragmentsBinding binding = FragmentChatsFragmentsBinding.inflate(inflater, container, false);
         DataBase database1 = DataBase.getInstance(ChatsFragments.this);
-        DataBaseHelper helper = new DataBaseHelper();
+        final DataBaseHelper helper = new DataBaseHelper();
         usersAdapter = new UsersAdapter(getContext(), list, database1, helper);
+        Intent i = new Intent(getContext(), BlockedContacts.class);
+        i.putExtra("list", list);
+
+
         binding.chatRecyclerViewFragments.setAdapter(usersAdapter);
         FirebaseDatabase Fdatabase = FirebaseDatabase.getInstance();
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());

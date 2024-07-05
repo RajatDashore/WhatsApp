@@ -5,19 +5,16 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".Fragments.CallsFragments">
+    tools:context=".Fragments.StatusFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
 
     <ImageView
         android:id="@+id/i"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="@dimen/_120sdp"
         android:layout_centerInParent="true"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_gravity="center"
         android:src="@drawable/baseline_block_24" />
 
     <TextView
@@ -26,9 +23,8 @@
         android:layout_below="@+id/i"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="0dp"
         android:gravity="center"
-        android:paddingHorizontal="@dimen/_10sdp"
+        android:paddingHorizontal="@dimen/_5sdp"
         android:text="Work in progress"
         android:textColor="@color/black"
         android:textSize="@dimen/_40ssp" />

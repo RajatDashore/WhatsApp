@@ -21,8 +21,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class BlockedAdapter extends RecyclerView.Adapter<BlockedAdapter.MyViewHolder> {
 
-    private final Context context;
     private final List<DataBaseHelper> list;
+    private final Context context;
+
 
     public BlockedAdapter(Context context, List<DataBaseHelper> list) {
         this.context = context;
@@ -50,7 +51,7 @@ public class BlockedAdapter extends RecyclerView.Adapter<BlockedAdapter.MyViewHo
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return list.size() - 1;
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {

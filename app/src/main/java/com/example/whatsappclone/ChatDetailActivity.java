@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.Editable;
@@ -128,26 +129,25 @@ public class ChatDetailActivity extends AppCompatActivity {
         chatRecyclerView.smoothScrollToPosition(messagesModel.size());
 
 
-        database.getReference().child("Messages").child(senderNode)
-                .addValueEventListener(new ValueEventListener() {
-                    @SuppressLint("NotifyDataSetChanged")
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        messagesModel.clear();
-                        for (DataSnapshot ds : snapshot.getChildren()) {
-                            MessageModel model = ds.getValue(MessageModel.class);
-                            assert model != null;
-                            model.setMessageId(ds.getKey());
-                            messagesModel.add(model);
-                        }
-                        chatAdapter.notifyDataSetChanged();
-                    }
+        database.getReference().child("Messages").child(senderNode).addValueEventListener(new ValueEventListener() {
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                messagesModel.clear();
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    MessageModel model = ds.getValue(MessageModel.class);
+                    assert model != null;
+                    model.setMessageId(ds.getKey());
+                    messagesModel.add(model);
+                }
+                chatAdapter.notifyDataSetChanged();
+            }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
-                    }
-                });
+            }
+        });
 
 
         send.setOnClickListener(new View.OnClickListener() {
@@ -159,25 +159,19 @@ public class ChatDetailActivity extends AppCompatActivity {
                     model.setTimeStamp(new Date().getTime());
                     edtChatting.setText("");
                     chatRecyclerView.smoothScrollToPosition(messagesModel.size());
-
-                    database.getReference()
-                            .child("Messages").child(senderNode)
-                            .push()
-                            .setValue(model)
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    MediaPlayer player = MediaPlayer.create(getApplicationContext(), R.raw.what_popup);
+                    player.start();
+                    database.getReference().child("Messages").child(senderNode).push().setValue(model).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            database.getReference().child("Messages").child(recieverNode).push().setValue(model).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
-                                    database.getReference()
-                                            .child("Messages").child(recieverNode)
-                                            .push().setValue(model)
-                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                @Override
-                                                public void onSuccess(Void unused) {
 
-                                                }
-                                            });
                                 }
                             });
+                        }
+                    });
 
                 } else {
                     edtChatting.setError("Message can't be send");
@@ -228,11 +222,8 @@ public class ChatDetailActivity extends AppCompatActivity {
     }
 
     public void CaptureImage(View View) {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.CAMERA}
-                    , REQUEST_CAMERA_PERMISSION);
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
         } else {
             Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             launcher.launch(i);

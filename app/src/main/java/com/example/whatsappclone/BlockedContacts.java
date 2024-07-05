@@ -12,12 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.whatsappclone.Adapters.BlockedAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class BlockedContacts extends AppCompatActivity {
-    private final List<DataBaseHelper> list = new ArrayList<>();
     private RecyclerView blockedRecyView;
     private BlockedAdapter blockedAdapter;
 
@@ -40,9 +38,8 @@ public class BlockedContacts extends AppCompatActivity {
 
         // Initialize RecyclerView and Adapter
         blockedRecyView = findViewById(R.id.blockedRecyclerView);
-
+        List<DataBaseHelper> list = (List<DataBaseHelper>) getIntent().getSerializableExtra("list");
         // Getting data from the DataBase and sending it to BlockedAdapter to show on RecyclerView
-        // list = DataBase.getInstance(BlockedContacts.this).UserDao().getlist();
         blockedAdapter = new BlockedAdapter(this, list);
         blockedRecyView.setAdapter(blockedAdapter);
         LinearLayoutManager lm = new LinearLayoutManager(this);

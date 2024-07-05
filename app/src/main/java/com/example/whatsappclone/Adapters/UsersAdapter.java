@@ -104,7 +104,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.MyViewHolder
         holder.itemView.setOnLongClickListener(v -> {
             new AlertDialog.Builder(context)
                     .setTitle("Block contact")
-                    .setMessage("Do you want to block?")
+                    .setMessage("Do you want to block the user ?")
                     .setPositiveButton("Block", (dialog, which) -> {
                         // Remove user from list and notify adapter
                         list.remove(position);
@@ -118,9 +118,10 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.MyViewHolder
                         helper.setImage(users.getProPicture());
                         database.UserDao().insert(helper);
 
-                        Toast.makeText(context, "User added in DataBase", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, users.getUserName() + " has been blocked", Toast.LENGTH_SHORT).show();
                     })
-                    .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
+                    .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss()
+                    ).setIcon(R.drawable.baseline_block_24)
                     .show();
 
             return true;
@@ -133,10 +134,10 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.MyViewHolder
     }
 
     private void RvAnimation(View view, int position) {
-        Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.fade_in);
+        Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
         if (position > lastPosition) {
             lastPosition = position;
-            animation.setDuration(500);  // Reduced duration
+            animation.setDuration(300);  // Reduced duration
             view.startAnimation(animation);
         }
     }

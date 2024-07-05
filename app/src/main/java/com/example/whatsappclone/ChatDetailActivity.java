@@ -1,9 +1,10 @@
 package com.example.whatsappclone;
 
+import static android.content.pm.PackageManager.PERMISSION_GRANTED;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -59,6 +60,8 @@ public class ChatDetailActivity extends AppCompatActivity {
             }
         }
     });
+
+    private Thread thread;
     private EditText edtChatting;
     private RecyclerView chatRecyclerView;
     private FirebaseDatabase database;
@@ -78,6 +81,7 @@ public class ChatDetailActivity extends AppCompatActivity {
         ImageView proPicture = findViewById(R.id.proPicture);
         recording = findViewById(R.id.recording);
         send = findViewById(R.id.send);
+        thread = new Thread();
         ImageView imgDoller = findViewById(R.id.imgDolar);
         ImageView imgCamera = findViewById(R.id.imgCamera);
         chatRecyclerView = findViewById(R.id.chatRecylcerView);
@@ -149,7 +153,6 @@ public class ChatDetailActivity extends AppCompatActivity {
             }
         });
 
-
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -215,18 +218,21 @@ public class ChatDetailActivity extends AppCompatActivity {
                 }
             }
         });
+        ChatDetailActivity cht = new ChatDetailActivity();
 
-
-        imgCamera.setOnClickListener(this::CaptureImage);
+        imgCamera.setOnClickListener(view -> thread.start());
 
     }
 
+
     public void CaptureImage(View View) {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
         } else {
             Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             launcher.launch(i);
+
         }
     }
 

@@ -85,13 +85,14 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.MyViewHolder
                         }
                     }
 
+                    @SuppressLint("SetTextI18n")
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
                         holder.lastMessage.setText("Error");
                     }
                 });
 
-        holder.itemView.setOnClickListener(v -> {
+        holder.itemView.setOnClickListener(view -> {
             Intent i = new Intent(context, ChatDetailActivity.class);
             i.putExtra("userName", users.getUserName());
             i.putExtra("proPicture", users.getProPicture());
@@ -137,7 +138,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.MyViewHolder
         Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
         if (position > lastPosition) {
             lastPosition = position;
-            animation.setDuration(300);  // Reduced duration
+            animation.setDuration(300);
             view.startAnimation(animation);
         }
     }

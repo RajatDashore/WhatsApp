@@ -54,7 +54,6 @@ public class Users {
         this.userName = userName;
     }
 
-
     public String getUserId() {
         return userId;
     }

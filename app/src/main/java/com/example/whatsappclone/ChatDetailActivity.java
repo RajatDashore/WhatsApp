@@ -112,10 +112,9 @@ public class ChatDetailActivity extends AppCompatActivity {
         userName.setText(username);
         Picasso.get().load(propicture).placeholder(R.drawable.person).into(proPicture);
 
-        if (recieveid != null) {
-            senderNode = FirebaseAuth.getInstance().getUid() + recieveid;
-            recieverNode = recieveid + FirebaseAuth.getInstance().getUid();
-        }
+        senderNode = FirebaseAuth.getInstance().getUid() + recieveid;
+        recieverNode = recieveid + FirebaseAuth.getInstance().getUid();
+
         ImageView call = findViewById(R.id.imageView5);
         call.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -220,7 +219,12 @@ public class ChatDetailActivity extends AppCompatActivity {
         });
         ChatDetailActivity cht = new ChatDetailActivity();
 
-        imgCamera.setOnClickListener(view -> thread.start());
+        imgCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CaptureImage(v);
+            }
+        });
 
     }
 

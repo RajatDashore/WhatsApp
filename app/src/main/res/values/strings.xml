@@ -9,9 +9,9 @@
     <string name="enter_name">Enter name</string>
     <string name="sign_up_with_phone">Sign up with phone</string>
     <string name="already_have_an_account">already have an account</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="default_web_client_id">AIzaSyBl-2wYxCjepTXsOv_g44qGyFJyh36wq7I</string>
+    <string name="default_web_client_id">
+AIzaSyBl-2wYxCjepTXsOv_g44qGyFJyh36wq7I</string>
     <string name="facebook2">Facebook</string>
     <string name="gmail">Gmail</string>
     <string name="signin">SignIN</string>

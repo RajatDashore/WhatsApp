@@ -14,9 +14,8 @@ public abstract class DataBase extends RoomDatabase {
 
     public synchronized static DataBase getInstance(ChatsFragments context) {
         if (database == null) {
-            database = Room.databaseBuilder(context.getContext(),
+            database = Room.databaseBuilder(context.requireContext(),
                             DataBase.class, DATABASE_NAME)
-                    .allowMainThreadQueries()
                     .fallbackToDestructiveMigration()
                     .build();
 

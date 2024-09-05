@@ -19,7 +19,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light"
         tools:targetApi="31">
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".BlockedContacts"
             android:exported="false" />
@@ -40,15 +48,6 @@
             android:exported="false"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".SplashActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".SignInActivity"
             android:exported="true" />
         <activity
@@ -58,7 +57,7 @@
             android:name=".MainActivity"
             android:exported="true" />
 
-        <service android:name="com.example.whatsappclone.FirebaseNotificationService" />
+        <!--        <service android:name=".FirebaseNotificationService" />-->
     </application>
 
 </manifest>

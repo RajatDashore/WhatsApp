@@ -15,19 +15,18 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class CapturedImage extends AppCompatActivity {
+import java.util.Objects;
 
-    private ImageView image;
-    private Button btnBack;
+public class CapturedImage extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_captured_image);
-        getSupportActionBar().hide();
+        Objects.requireNonNull(getSupportActionBar()).hide();
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), this::onApplyWindowInsets);
-        btnBack = findViewById(R.id.backbtn);
+        Button btnBack = findViewById(R.id.backbtn);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,7 +44,7 @@ public class CapturedImage extends AppCompatActivity {
         Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
         v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
 
-        image = findViewById(R.id.CapturedImage);
+        ImageView image = findViewById(R.id.CapturedImage);
         Intent i = getIntent();
         Bitmap map = i.getParcelableExtra("bitMap");
         image.setImageBitmap(map);

@@ -85,6 +85,7 @@ dependencies {
     implementation("androidx.activity:activity-ktx:1.9.0")
     implementation("androidx.camera:camera-core:1.3.4")
     implementation("com.google.firebase:firebase-storage:21.0.0")
+    implementation("androidx.activity:activity:1.9.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")

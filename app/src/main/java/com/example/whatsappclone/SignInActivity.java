@@ -3,6 +3,7 @@ package com.example.whatsappclone;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,6 +11,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -32,10 +37,23 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.Objects;
 
 public class SignInActivity extends AppCompatActivity {
-    private static final int RC_SIGN_IN = 20;
-    private FirebaseDatabase databaseIn;
     private ProgressBar progressBar;
     private FirebaseAuth authIn;
+    ActivityResultLauncher<Intent> launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+        @Override
+        public void onActivityResult(ActivityResult data) {
+            if (data.getData() != null) {
+                Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data.getData());
+                try {
+                    GoogleSignInAccount account = task.getResult(ApiException.class);
+                    handleSignInResult(account.getIdToken());
+                } catch (ApiException e) {
+                    Log.d("Error", e.getMessage());
+                    Toast.makeText(getApplicationContext(), "Login failed ", Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+    });
     private EditText eMail, passWord;
     private DatabaseReference databaseReference;
     private GoogleSignInClient mGoogleSignInClient;
@@ -49,7 +67,7 @@ public class SignInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_in);
         Objects.requireNonNull(getSupportActionBar()).hide();
         authIn = FirebaseAuth.getInstance();
-        databaseIn = FirebaseDatabase.getInstance();
+        FirebaseDatabase databaseIn = FirebaseDatabase.getInstance();
         progressBar = findViewById(R.id.progressBar);
         TextView txtSignUp = findViewById(R.id.txtSignUp);
         Button btnSignIn = findViewById(R.id.btnSignIn);
@@ -100,27 +118,7 @@ public class SignInActivity extends AppCompatActivity {
 
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
-
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
-        if (requestCode == RC_SIGN_IN) {
-            // The Task returned from this call is always completed, no need to attach
-            // a listener.
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            try {
-                GoogleSignInAccount account = task.getResult(ApiException.class);
-                handleSignInResult(account.getIdToken());
-            } catch (ApiException e) {
-                Toast.makeText(this, "Login failed ", Toast.LENGTH_LONG).show();
-            }
-
-        }
+        launcher.launch(signInIntent);
     }
 
 

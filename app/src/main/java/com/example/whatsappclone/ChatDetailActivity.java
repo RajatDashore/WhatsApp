@@ -236,7 +236,6 @@ public class ChatDetailActivity extends AppCompatActivity {
         } else {
             Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             launcher.launch(i);
-
         }
     }
 

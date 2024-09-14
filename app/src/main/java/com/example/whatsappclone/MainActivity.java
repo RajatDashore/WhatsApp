@@ -15,9 +15,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.whatsappclone.Adapters.FragmentAdapter;
 import com.example.whatsappclone.databinding.ActivityMainBinding;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -90,8 +88,11 @@ public class MainActivity extends AppCompatActivity {
             Intent i = new Intent(MainActivity.this, Settings.class);
             startActivity(i);
         } else if (item.getItemId() == R.id.Logout) {
-            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().requestIdToken(String.valueOf(R.string.default_web_client_id)).build();
-            client = GoogleSignIn.getClient(getApplicationContext(), gso);
+//            Dialog dialog = new Dialog(getApplicationContext());
+//            dialog.setContentView(R.layout.logout);
+//            dialog.show();
+//            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().requestIdToken(String.valueOf(R.string.default_web_client_id)).build();
+//            client = GoogleSignIn.getClient(getApplicationContext(), gso);
             Intent i = new Intent(MainActivity.this, SignUpActivity.class);
             startActivity(i);
             finish();

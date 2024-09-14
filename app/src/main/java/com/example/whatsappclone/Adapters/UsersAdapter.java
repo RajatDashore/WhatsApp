@@ -28,10 +28,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -65,30 +62,22 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.MyViewHolder
         Picasso.get().load(users.getProPicture()).placeholder(R.drawable.person).into(holder.imageView);
 
         FirebaseDatabase.getInstance().getReference().child("Messages")
-                .child(FirebaseAuth.getInstance().getUid() + users.getUserId())
+                .child(FirebaseAuth.getInstance().getUid())
                 .orderByChild("timeStamp")
                 .limitToLast(1)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (snapshot.hasChildren()) {
-                            for (DataSnapshot ds : snapshot.getChildren()) {
-                                holder.lastMessage.setText(ds.child("message").getValue(String.class));
-                                Long timestamp = ds.child("timeStamp").getValue(Long.class);
-                                if (timestamp != null) {
-                                    @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("h:mm aaa", Locale.getDefault());
-                                    holder.time.setText(sdf.format(new Date(timestamp)));
-                                } else {
-                                    holder.time.setText("");
-                                }
-                            }
-                        }
+                        String lastM = snapshot.child("message").getValue(String.class);
+                        Toast.makeText(context, "!!!!", Toast.LENGTH_SHORT).show();
+                        holder.lastMessage.setText(lastM);
                     }
 
                     @SuppressLint("SetTextI18n")
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
                         holder.lastMessage.setText("Error");
+                        Toast.makeText(context, "%", Toast.LENGTH_SHORT).show();
                     }
                 });
 

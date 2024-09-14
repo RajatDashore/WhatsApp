@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="@dimen/_8sdp">
+    android:padding="@dimen/_10sdp">
 
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -44,7 +44,6 @@
         android:maxLines="1"
         android:paddingTop="@dimen/_4sdp"
         android:paddingBottom="@dimen/_2sdp"
-        android:text="No last Message"
         android:textColor="@color/black"
         android:textSize="@dimen/_10ssp"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"

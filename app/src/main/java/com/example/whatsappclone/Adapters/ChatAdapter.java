@@ -65,8 +65,6 @@ public class ChatAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MessageModel model = list.get(position);
-
-
         // to delete the chats from the ChatRecyclerView
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override

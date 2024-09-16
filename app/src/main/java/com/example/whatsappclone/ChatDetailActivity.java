@@ -61,7 +61,6 @@ public class ChatDetailActivity extends AppCompatActivity {
         }
     });
 
-    private Thread thread;
     private EditText edtChatting;
     private RecyclerView chatRecyclerView;
     private FirebaseDatabase database;
@@ -81,7 +80,7 @@ public class ChatDetailActivity extends AppCompatActivity {
         ImageView proPicture = findViewById(R.id.proPicture);
         recording = findViewById(R.id.recording);
         send = findViewById(R.id.send);
-        thread = new Thread();
+        Thread thread = new Thread();
         ImageView imgDoller = findViewById(R.id.imgDolar);
         ImageView imgCamera = findViewById(R.id.imgCamera);
         chatRecyclerView = findViewById(R.id.chatRecylcerView);
@@ -137,12 +136,15 @@ public class ChatDetailActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 messagesModel.clear();
-                for (DataSnapshot ds : snapshot.getChildren()) {
-                    MessageModel model = ds.getValue(MessageModel.class);
-                    assert model != null;
-                    model.setMessageId(ds.getKey());
-                    messagesModel.add(model);
+                if (snapshot.hasChildren()) {
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        MessageModel model = ds.getValue(MessageModel.class);
+                        assert model != null;
+                        model.setMessageId(ds.getKey());
+                        messagesModel.add(model);
+                    }
                 }
+
                 chatAdapter.notifyDataSetChanged();
             }
 
@@ -217,7 +219,6 @@ public class ChatDetailActivity extends AppCompatActivity {
                 }
             }
         });
-        ChatDetailActivity cht = new ChatDetailActivity();
 
         imgCamera.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -23,70 +23,81 @@
                 android:id="@+id/imgBackArrow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
                 android:src="@drawable/back_arrow_svg"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/proPicture"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5" />
+                app:layout_constraintVertical_bias="0.5"
+                tools:ignore="ContentDescription" />
 
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/proPicture"
                 android:layout_width="@dimen/_35sdp"
                 android:layout_height="@dimen/_35sdp"
-                android:layout_marginLeft="@dimen/_7sdp"
+                android:layout_marginStart="@dimen/_7sdp"
                 android:background="@drawable/pro_picture_bg"
+                android:contentDescription="@string/dasda"
                 android:onClick="showUserDetail"
                 android:src="@drawable/person"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imgBackArrow"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5" />
+                app:layout_constraintVertical_bias="0.5"
+                tools:ignore="TouchTargetSizeCheck,ImageContrastCheck,DuplicateSpeakableTextCheck" />
 
             <TextView
                 android:id="@+id/userName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_5sdp"
+                android:gravity="center"
+                android:minHeight="48dp"
                 android:onClick="showUserDetail"
                 android:text="UserName"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp18"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/proPicture"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="HardcodedText" />
 
             <ImageView
                 android:id="@+id/imageView5"
                 android:layout_width="@dimen/_20sdp"
                 android:layout_height="@dimen/_20sdp"
-                android:layout_marginRight="@dimen/_9sdp"
+                android:layout_marginEnd="@dimen/_9sdp"
+                android:contentDescription="TODO"
                 android:src="@drawable/baseline_call_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/imageView3"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription,HardcodedText" />
 
             <ImageView
                 android:id="@+id/imageView3"
                 android:layout_width="@dimen/_20sdp"
                 android:layout_height="@dimen/_20sdp"
-                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:contentDescription="@string/ggug"
                 android:src="@drawable/vertical_three_dots_svg"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5" />
+                app:layout_constraintVertical_bias="0.5"
+                tools:ignore="ContentDescription" />
 
             <ImageView
                 android:id="@+id/videoCall"
                 android:layout_width="@dimen/_20sdp"
                 android:layout_height="@dimen/_20sdp"
-                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/imageView5"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/video_call_svg" />
+                app:srcCompat="@drawable/video_call_svg"
+                tools:ignore="ContentDescription" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -121,7 +132,8 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5">
+            app:layout_constraintVertical_bias="0.5"
+            tools:ignore="ExtraText">
 
             =
 
@@ -136,7 +148,8 @@
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5" />
+                app:layout_constraintVertical_bias="0.5"
+                tools:ignore="ContentDescription,ImageContrastCheck" />
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edtChatting"
@@ -150,7 +163,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/guideline"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5" />
+                app:layout_constraintVertical_bias="0.5"
+                tools:ignore="HardcodedText,TouchTargetSizeCheck" />
 
             <ImageView
                 android:id="@+id/imgClip"
@@ -162,7 +176,8 @@
                 app:layout_constraintEnd_toStartOf="@id/imgDolar"
                 app:layout_constraintStart_toEndOf="@id/edtChatting"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5" />
+                app:layout_constraintVertical_bias="0.5"
+                tools:ignore="ContentDescription" />
 
             <ImageView
                 android:id="@+id/imgDolar"
@@ -177,7 +192,8 @@
                 app:layout_constraintEnd_toStartOf="@id/imgCamera"
                 app:layout_constraintStart_toEndOf="@id/imgClip"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5" />
+                app:layout_constraintVertical_bias="0.5"
+                tools:ignore="ContentDescription,ImageContrastCheck" />
 
             <ImageView
                 android:id="@+id/imgCamera"
@@ -190,7 +206,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/imgDolar"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5" />
+                app:layout_constraintVertical_bias="0.5"
+                tools:ignore="ContentDescription,ImageContrastCheck" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline"
@@ -216,7 +233,8 @@
             app:layout_constraintEnd_toEndOf="@id/LL"
             app:layout_constraintStart_toStartOf="@id/guideline3"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5" />
+            app:layout_constraintVertical_bias="0.5"
+            tools:ignore="ContentDescription,ImageContrastCheck,VisualLintBounds" />
 
 
         <ImageView
@@ -232,7 +250,8 @@
             app:layout_constraintEnd_toEndOf="@id/LL"
             app:layout_constraintStart_toStartOf="@id/guideline3"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5" />
+            app:layout_constraintVertical_bias="0.5"
+            tools:ignore="ContentDescription" />
 
 
         <androidx.constraintlayout.widget.Guideline

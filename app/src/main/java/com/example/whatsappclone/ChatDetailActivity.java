@@ -114,7 +114,7 @@ public class ChatDetailActivity extends AppCompatActivity {
                 messagesModel.clear();
                 if (snapshot.hasChildren()) {
                     for (DataSnapshot ds : snapshot.getChildren()) {
-                        MessageModel model = ds.getValue(MessageModel.class);
+                        MessageModel model = ds.getValue(MessageModel.class)
                         assert model != null;
                         model.setMessageId(ds.getKey());
                         messagesModel.add(model);

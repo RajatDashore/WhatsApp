@@ -24,7 +24,6 @@ public class CapturedImage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_captured_image);
-        getSupportActionBar().hide();
         Objects.requireNonNull(getSupportActionBar()).hide();
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), this::onApplyWindowInsets);
         Button btnBack = findViewById(R.id.backbtn);

@@ -70,7 +70,7 @@ public class ChatAdapter extends RecyclerView.Adapter {
             @Override
             public boolean onLongClick(View v) {
 
-                new AlertDialog.Builder(context).setIcon(R.drawable.baseline_delete_24).setTitle("Delete").setMessage("Delete message").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                new AlertDialog.Builder(context).setIcon(R.drawable.baseline_delete_24).setTitle("Delete").setMessage("Are you sure you want to delete").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         FirebaseDatabase database = FirebaseDatabase.getInstance();

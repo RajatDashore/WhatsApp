@@ -17,8 +17,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
@@ -30,7 +28,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.whatsappclone.Adapters.ChatAdapter;
 import com.example.whatsappclone.Modules.MessageModel;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -46,18 +43,15 @@ public class ChatDetailActivity extends AppCompatActivity {
 
 
     private final static int REQUEST_CAMERA_PERMISSION = 111;
-    ActivityResultLauncher<Intent> launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
-        @Override
-        public void onActivityResult(ActivityResult result) {
-            int R = result.getResultCode();
-            Intent data = result.getData();
-            if (R == RESULT_OK && data != null) {
-                Bundle extras = Objects.requireNonNull(data).getExtras();
-                Bitmap map = (Bitmap) Objects.requireNonNull(extras).get("data");
-                Intent i = new Intent(ChatDetailActivity.this, CapturedImage.class);
-                i.putExtra("bitMap", map);
-                startActivity(i);
-            }
+    ActivityResultLauncher<Intent> launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+        int R = result.getResultCode();
+        Intent data = result.getData();
+        if (R == RESULT_OK && data != null) {
+            Bundle extras = Objects.requireNonNull(data).getExtras();
+            Bitmap map = (Bitmap) Objects.requireNonNull(extras).get("data");
+            Intent i = new Intent(ChatDetailActivity.this, CapturedImage.class);
+            i.putExtra("bitMap", map);
+            startActivity(i);
         }
     });
 
@@ -80,7 +74,6 @@ public class ChatDetailActivity extends AppCompatActivity {
         ImageView proPicture = findViewById(R.id.proPicture);
         recording = findViewById(R.id.recording);
         send = findViewById(R.id.send);
-        Thread thread = new Thread();
         ImageView imgDoller = findViewById(R.id.imgDolar);
         ImageView imgCamera = findViewById(R.id.imgCamera);
         chatRecyclerView = findViewById(R.id.chatRecylcerView);
@@ -93,19 +86,7 @@ public class ChatDetailActivity extends AppCompatActivity {
         String propicture = getIntent().getStringExtra("proPicture");
 
 
-        videoCallBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Intent intent = new Intent(ChatDetailActivity.this, VideoCallOutgoing.class);
-//                intent.putExtra("ProPicture", propicture);
-//                intent.putExtra("uId", recieveid);
-//                intent.putExtra("Name", username);
-//                startActivity(intent);
-
-                Toast.makeText(ChatDetailActivity.this, "Work in progress", Toast.LENGTH_SHORT).show();
-
-            }
-        });
+        videoCallBtn.setOnClickListener(v -> Toast.makeText(ChatDetailActivity.this, "Work in progress", Toast.LENGTH_SHORT).show());
 
 
         userName.setText(username);
@@ -115,12 +96,7 @@ public class ChatDetailActivity extends AppCompatActivity {
         recieverNode = recieveid + FirebaseAuth.getInstance().getUid();
 
         ImageView call = findViewById(R.id.imageView5);
-        call.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(ChatDetailActivity.this, "Work in progress", Toast.LENGTH_SHORT).show();
-            }
-        });
+        call.setOnClickListener(v -> Toast.makeText(ChatDetailActivity.this, "Work in progress", Toast.LENGTH_SHORT).show());
 
 
         final ArrayList<MessageModel> messagesModel = new ArrayList<>();
@@ -154,41 +130,25 @@ public class ChatDetailActivity extends AppCompatActivity {
             }
         });
 
-        send.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String message = edtChatting.getText().toString();
-                if (!message.trim().isEmpty()) {
-                    final MessageModel model = new MessageModel(senderId, message);
-                    model.setTimeStamp(new Date().getTime());
-                    edtChatting.setText("");
-                    chatRecyclerView.smoothScrollToPosition(messagesModel.size());
-                    MediaPlayer player = MediaPlayer.create(getApplicationContext(), R.raw.what_popup);
-                    player.start();
-                    database.getReference().child("Messages").child(senderNode).push().setValue(model).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void unused) {
-                            database.getReference().child("Messages").child(recieverNode).push().setValue(model).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void unused) {
+        send.setOnClickListener(v -> {
+            String message = edtChatting.getText().toString();
+            if (!message.trim().isEmpty()) {
+                final MessageModel model = new MessageModel(senderId, message);
+                model.setTimeStamp(new Date().getTime());
+                edtChatting.setText("");
+                chatRecyclerView.smoothScrollToPosition(messagesModel.size());
+                MediaPlayer player = MediaPlayer.create(getApplicationContext(), R.raw.what_popup);
+                player.start();
+                database.getReference().child("Messages").child(senderNode).push().setValue(model).addOnSuccessListener(unused -> database.getReference().child("Messages").child(recieverNode).push().setValue(model).addOnSuccessListener(unused1 -> {
 
-                                }
-                            });
-                        }
-                    });
+                }));
 
-                } else {
-                    edtChatting.setError("Message can't be send");
-                }
+            } else {
+                edtChatting.setError("Message can't be send");
             }
         });
 
-        imgBackArrow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getOnBackPressedDispatcher().onBackPressed();
-            }
-        });
+        imgBackArrow.setOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
 
 
         edtChatting.addTextChangedListener(new TextWatcher() {
@@ -220,12 +180,7 @@ public class ChatDetailActivity extends AppCompatActivity {
             }
         });
 
-        imgCamera.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CaptureImage(v);
-            }
-        });
+        imgCamera.setOnClickListener(this::CaptureImage);
 
     }
 
@@ -237,14 +192,8 @@ public class ChatDetailActivity extends AppCompatActivity {
         } else {
             Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             launcher.launch(i);
+
         }
     }
-
-//    private void showUserDetail(View view) {
-//        View layout = new View(this);
-//        layout = findViewById(R.id.layoutShow);
-//        layout.setVisibility(View.VISIBLE);
-//        layout.setActivated(true);
-//    }
 
 }

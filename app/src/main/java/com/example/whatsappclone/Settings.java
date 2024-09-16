@@ -15,6 +15,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.whatsappclone.Modules.Users;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -44,7 +45,7 @@ public class Settings extends AppCompatActivity {
                         Uri imageUri = result.getData().getData();
                         if (imageUri != null) {
                             final StorageReference reference = storage.getReference()
-                                    .child("ProfilePictures")
+                                    .child("ProPicture")
                                     .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()));
 
                             reference.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -57,7 +58,6 @@ public class Settings extends AppCompatActivity {
                                                     .child(FirebaseAuth.getInstance().getUid())
                                                     .child("proPicture")
                                                     .setValue(uri.toString());
-                                            Toast.makeText(Settings.this, "Photo uploaded into storage", Toast.LENGTH_SHORT).show();
                                         }
                                     });
                                 }
@@ -89,9 +89,8 @@ public class Settings extends AppCompatActivity {
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        String uri = snapshot.child("proPicture").getValue(String.class);
-                        Picasso.get().load(uri).placeholder(R.drawable.person).into(imgPerson);
-                        Toast.makeText(Settings.this, "Photo", Toast.LENGTH_SHORT).show();
+                        Users users = snapshot.getValue(Users.class);
+                        Picasso.get().load(Objects.requireNonNull(users).getProPicture()).placeholder(R.drawable.person).into(imgPerson);
                     }
 
                     @Override
@@ -99,14 +98,6 @@ public class Settings extends AppCompatActivity {
                         Toast.makeText(Settings.this, "Failed to update the photo", Toast.LENGTH_SHORT).show();
                     }
                 });
-
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Settings.this, MainActivity.class));
-                finish();
-            }
-        });
 
         imgPerson.setOnClickListener(new View.OnClickListener() {
             @Override

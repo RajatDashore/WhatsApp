@@ -81,7 +81,7 @@ public class ChatDetailActivity extends AppCompatActivity {
         edtChatting.setBackground(getDrawable(android.R.drawable.screen_background_light_transparent));
 
         final String senderId = auth.getUid();
-        String recieveid = getIntent().getStringExtra("UserId");
+        String recieveid = getIntent().getStringExtra("id");
         String username = getIntent().getStringExtra("userName");
         String propicture = getIntent().getStringExtra("proPicture");
 

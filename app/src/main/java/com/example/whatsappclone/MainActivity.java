@@ -1,5 +1,7 @@
 package com.example.whatsappclone;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,50 +11,33 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.whatsappclone.Adapters.FragmentAdapter;
-import com.example.whatsappclone.databinding.ActivityMainBinding;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
-
-    private ActivityMainBinding binding;
-    private RecyclerView recyclerView;
-    private String YourName;
-    private FirebaseUser user;
-    private ViewPager viewPager;
-    private TabLayout tabLayout;
-    private FirebaseAuth auth;
-    private FragmentAdapter fragmentAdapter;
-    private DatabaseReference databaseReference;
-    private GoogleSignInClient client;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        viewPager = findViewById(R.id.viewPager);
+        ViewPager viewPager = findViewById(R.id.viewPager);
         viewPager.setAdapter(new FragmentAdapter(getSupportFragmentManager()));
-        tabLayout = findViewById(R.id.tabLayout);
+        TabLayout tabLayout = findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager);
-        auth = FirebaseAuth.getInstance();
-        tabLayout.getTabAt(0).setIcon(R.drawable.baseline_chat_24);
-        tabLayout.getTabAt(1).setIcon(R.drawable.search);
-        tabLayout.getTabAt(2).setIcon(R.drawable.baseline_call_24);
-        databaseReference = FirebaseDatabase.getInstance().getReference();
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        Objects.requireNonNull(tabLayout.getTabAt(0)).setIcon(R.drawable.baseline_chat_24);
+        Objects.requireNonNull(tabLayout.getTabAt(1)).setIcon(R.drawable.search);
+        Objects.requireNonNull(tabLayout.getTabAt(2)).setIcon(R.drawable.baseline_call_24);
 
-        user = auth.getCurrentUser();
-        getSupportActionBar().setTitle("WhatsApp");
+        FirebaseUser user = auth.getCurrentUser();
+        Objects.requireNonNull(getSupportActionBar()).setTitle("WhatsApp");
 
         if (user == null) {
             Intent i = new Intent(MainActivity.this, SignUpActivity.class);
@@ -77,11 +62,26 @@ public class MainActivity extends AppCompatActivity {
             Intent i = new Intent(MainActivity.this, Settings.class);
             startActivity(i);
         } else if (item.getItemId() == R.id.Logout) {
-            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().requestIdToken(String.valueOf(R.string.default_web_client_id)).build();
-            client = GoogleSignIn.getClient(getApplicationContext(), gso);
-            Intent i = new Intent(MainActivity.this, SignUpActivity.class);
-            startActivity(i);
-            finish();
+//            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().requestIdToken(String.valueOf(R.string.default_web_client_id)).build();
+//            client = GoogleSignIn.getClient(getApplicationContext(), gso);
+            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+            dialog.setCancelable(false);
+            dialog.setIcon(R.drawable.baseline_logout_24);
+            dialog.setMessage("Do you want to logout ?")
+                    .setPositiveButton("Logout", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            FirebaseAuth.getInstance().signOut();
+                            Intent i = new Intent(MainActivity.this, SignUpActivity.class);
+                            startActivity(i);
+                            finish();
+                        }
+                    }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    }).show();
         }
 
         return true;

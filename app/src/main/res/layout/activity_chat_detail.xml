@@ -132,10 +132,7 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5"
-            tools:ignore="ExtraText">
-
-            =
+            app:layout_constraintVertical_bias="0.5">
 
             <ImageView
                 android:id="@+id/imgEmoji"
@@ -159,8 +156,8 @@
                 android:background="@color/white"
                 android:ems="6"
                 android:hint="Message"
-                android:inputType="textMultiLine|textNoSuggestions"
-                android:maxLines="6"
+                android:inputType="textMultiLine|textAutoComplete|textAutoCorrect"
+                android:maxLines="5"
                 android:padding="@dimen/_6sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/guideline"

@@ -27,7 +27,8 @@
             android:layout_marginEnd="@dimen/_10sdp"
             android:paddingHorizontal="@dimen/_5sdp"
             android:textColor="@color/black"
-            android:textSize="@dimen/_12ssp" />
+            android:textSize="@dimen/_12ssp"
+            android:textStyle="normal" />
 
         <TextView
             android:id="@+id/TimeStampSender"
@@ -39,6 +40,7 @@
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_10sdp"
             android:textSize="@dimen/_8ssp"
+            android:textStyle="normal"
             tools:ignore="ObsoleteLayoutParam" />
 
 

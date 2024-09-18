@@ -65,8 +65,6 @@ public class ChatsFragments extends Fragment {
                         }
                     }
                     usersAdapter.notifyDataSetChanged();
-                    Toast.makeText(getContext(), "Working fine", Toast.LENGTH_SHORT).show();
-
                 }
             }
 

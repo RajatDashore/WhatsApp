@@ -37,7 +37,7 @@
         app:tabIndicator="@color/black"
         app:tabMaxWidth="0dp"
         app:tabMode="fixed"
-        app:tabSelectedTextColor="@color/green"
+        app:tabSelectedTextColor="@color/Lightgreen"
         app:tabTextColor="@color/black" />
 
 

@@ -15,8 +15,9 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.whatsappclone.Modules.Users;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -45,19 +46,17 @@ public class Settings extends AppCompatActivity {
                         Uri imageUri = result.getData().getData();
                         if (imageUri != null) {
                             final StorageReference reference = storage.getReference()
-                                    .child("ProPicture")
+                                    .child("Pro_Picture")
                                     .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()));
 
-                            reference.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            reference.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                                 @Override
-                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                public void onComplete(@androidx.annotation.NonNull Task<UploadTask.TaskSnapshot> task) {
                                     reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                         @Override
                                         public void onSuccess(Uri uri) {
-                                            database.getReference().child("Users")
-                                                    .child(FirebaseAuth.getInstance().getUid())
-                                                    .child("proPicture")
-                                                    .setValue(uri.toString());
+                                            database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid())
+                                                    .child("proPicture").setValue(uri.toString());
                                         }
                                     });
                                 }
@@ -81,7 +80,7 @@ public class Settings extends AppCompatActivity {
 
         Button saveButton = findViewById(R.id.SaveButton);
         ImageView back = findViewById(R.id.backArrow);
-        getSupportActionBar().hide();
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
 
         database.getReference().child("Users")
@@ -89,8 +88,8 @@ public class Settings extends AppCompatActivity {
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        Users users = snapshot.getValue(Users.class);
-                        Picasso.get().load(Objects.requireNonNull(users).getProPicture()).placeholder(R.drawable.person).into(imgPerson);
+
+                        Picasso.get().load(String.valueOf(snapshot.child("proPicture"))).placeholder(R.drawable.person).into(imgPerson);
                     }
 
                     @Override
@@ -106,6 +105,14 @@ public class Settings extends AppCompatActivity {
                 i.setAction(Intent.ACTION_GET_CONTENT);
                 i.setType("image/*");
                 SettingLauncher.launch(i);
+            }
+        });
+
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getOnBackPressedDispatcher().onBackPressed();
             }
         });
     }

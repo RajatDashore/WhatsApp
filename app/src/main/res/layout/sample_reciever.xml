@@ -16,7 +16,8 @@
         android:minWidth="@dimen/_60sdp"
         android:paddingHorizontal="@dimen/_5sdp"
         android:textColor="@color/black"
-        android:textSize="@dimen/_12ssp" />
+        android:textSize="@dimen/_12ssp"
+        android:textStyle="normal" />
 
     <TextView
         android:id="@+id/TimeStampReciever"
@@ -26,7 +27,8 @@
         android:layout_alignEnd="@id/RecievedMessage"
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_5sdp"
-        android:textSize="@dimen/_8ssp" />
+        android:textSize="@dimen/_8ssp"
+        android:textStyle="normal" />
 
 
 </RelativeLayout>

@@ -139,9 +139,12 @@ public class ChatDetailActivity extends AppCompatActivity {
                 chatRecyclerView.smoothScrollToPosition(messagesModel.size());
                 MediaPlayer player = MediaPlayer.create(getApplicationContext(), R.raw.what_popup);
                 player.start();
-                database.getReference().child("Messages").child(senderNode).push().setValue(model).addOnSuccessListener(unused -> database.getReference().child("Messages").child(recieverNode).push().setValue(model).addOnSuccessListener(unused1 -> {
+                database.getReference().child("Messages").child(senderNode).push()
+                        .setValue(model).addOnSuccessListener(unused -> database.getReference()
+                                .child("Messages").child(recieverNode).push()
+                                .setValue(model).addOnSuccessListener(unused1 -> {
 
-                }));
+                                }));
 
             } else {
                 edtChatting.setError("Message can't be send");
@@ -164,11 +167,13 @@ public class ChatDetailActivity extends AppCompatActivity {
                     recording.setVisibility(View.GONE);
                     imgDoller.setVisibility(View.GONE);
                     imgCamera.setVisibility(View.GONE);
+                    edtChatting.setEms(12);
                 } else {
                     send.setVisibility(View.GONE);
                     recording.setVisibility(View.VISIBLE);
                     imgDoller.setVisibility(View.VISIBLE);
                     imgCamera.setVisibility(View.VISIBLE);
+                    edtChatting.setEms(6);
                 }
             }
 
@@ -192,7 +197,6 @@ public class ChatDetailActivity extends AppCompatActivity {
         } else {
             Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             launcher.launch(i);
-
         }
     }
 

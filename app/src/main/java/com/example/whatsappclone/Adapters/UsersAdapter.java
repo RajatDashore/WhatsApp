@@ -36,14 +36,14 @@ import java.util.Locale;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.MyViewHolder> {
-    private final Context context;
+    private static Context context;
     private final ArrayList<Users> list;
     private final DataBase database;
     private final DataBaseHelper helper;
     private int lastPosition = -1;
 
     public UsersAdapter(Context context, ArrayList<Users> list, DataBase database, DataBaseHelper helper) {
-        this.context = context;
+        UsersAdapter.context = context;
         this.list = list;
         this.database = database;
         this.helper = helper;
@@ -59,7 +59,11 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.MyViewHolder
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Users users = list.get(position);
-        holder.name.setText(users.getUserName());
+        if (users.getUserName().length() > 15) {
+            holder.name.setText(users.getUserName().substring(15, users.getUserName().length() - 1));
+        } else {
+            holder.name.setText(users.getUserName());
+        }
         RvAnimation(holder.itemView, position);
 
         Picasso.get().load(users.getProPicture()).placeholder(R.drawable.person).into(holder.imageView);

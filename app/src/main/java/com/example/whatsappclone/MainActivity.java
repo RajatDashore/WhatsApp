@@ -8,7 +8,6 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -24,8 +23,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.text.SimpleDateFormat;
-
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
@@ -39,10 +36,6 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private GoogleSignInClient client;
 
-
-    public static String TimeStampToString(long timestamp) {
-        return new SimpleDateFormat("HH:mm").format(timestamp);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,13 +52,7 @@ public class MainActivity extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
         user = auth.getCurrentUser();
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setHomeButtonEnabled(true);
-        actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setIcon(R.drawable.whatapp_svg_splash);
-        getSupportActionBar().show();
-        String userName = getIntent().getStringExtra("username");
-        getSupportActionBar().setTitle(userName);
+        getSupportActionBar().setTitle("WhatsApp");
 
         if (user == null) {
             Intent i = new Intent(MainActivity.this, SignUpActivity.class);

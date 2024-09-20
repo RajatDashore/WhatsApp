@@ -1,5 +1,6 @@
 package com.example.whatsappclone.Adapters;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -63,30 +64,68 @@ public class ChatAdapter extends RecyclerView.Adapter {
 
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         MessageModel model = list.get(position);
         // to delete the chats from the ChatRecyclerView
+
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-
-                new AlertDialog.Builder(context).setIcon(R.drawable.baseline_delete_24).setTitle("Delete").setMessage("Are you sure you want to delete").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        FirebaseDatabase database = FirebaseDatabase.getInstance();
-                        String senderID = FirebaseAuth.getInstance().getUid() + RecId;
-                        database.getReference().child("Messages").child(senderID).child(model.getMessageId()).setValue(null);
-                    }
-                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                }).show();
-
+                new AlertDialog.Builder(context).setIcon(R.drawable.baseline_delete_24).setTitle("Delete for me").setMessage("Are you sure you want to delete").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                String senderID = FirebaseAuth.getInstance().getUid() + RecId;
+                                database.getReference().child("Messages").child(senderID).child(model.getMessageId()).setValue(null);
+                            }
+                        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .setNeutralButton("Delete for everyone", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                String senderId = FirebaseAuth.getInstance().getUid() + RecId;
+                                String recId = RecId + FirebaseAuth.getInstance().getUid();
+                                FirebaseDatabase.getInstance().getReference().child("Messages").child(senderId).child(model.getMessageId()).setValue(null);
+                                FirebaseDatabase.getInstance().getReference().child("Messages").child(recId).child(model.getMessageId()).setValue(null);
+                                dialog.cancel();
+                            }
+                        }).show();
                 return false;
             }
         });
+//        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+//            @Override
+//            public boolean onLongClick(View v) {
+//                MessageModel model1;
+//                isSelected = true;
+//                if (selected.contains(list.get(position))) {
+//                    selected.remove(list.get(position));
+//                    VideoCall.setVisibility(View.GONE);
+//                    Call.setVisibility(View.GONE);
+//                    Dots.setVisibility(View.GONE);
+//                } else {
+//                    holder.itemView.setBackgroundColor(Color.BLUE);
+//                    selected.add(list.get(position));
+//                    VideoCall.setVisibility(View.VISIBLE);
+//                    Call.setVisibility(View.GONE);
+//                    Dots.setVisibility(View.GONE);
+//                }
+//                if (selected.size() > 0) {
+//
+//                }
+//
+//                if (selected.size() == 0) {
+//                    isSelected = false;
+//                    return true;
+//                }
+//                return false;
+//            }
+//        });
+
 
         if (holder.getClass() == SenderViewHolder.class) {
             ((SenderViewHolder) holder).SenderMSg.setText(model.getMessage());
@@ -105,6 +144,7 @@ public class ChatAdapter extends RecyclerView.Adapter {
 
 
     }
+
 
     @Override
     public int getItemCount() {

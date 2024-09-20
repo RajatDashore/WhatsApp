@@ -28,6 +28,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.whatsappclone.Adapters.ChatAdapter;
 import com.example.whatsappclone.Modules.MessageModel;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -139,19 +140,34 @@ public class ChatDetailActivity extends AppCompatActivity {
                 chatRecyclerView.smoothScrollToPosition(messagesModel.size());
                 MediaPlayer player = MediaPlayer.create(getApplicationContext(), R.raw.what_popup);
                 player.start();
-                database.getReference().child("Messages").child(senderNode).push()
-                        .setValue(model).addOnSuccessListener(unused -> database.getReference()
-                                .child("Messages").child(recieverNode).push()
-                                .setValue(model).addOnSuccessListener(unused1 -> {
+                if (FirebaseAuth.getInstance().getUid().equals(recieveid)) {
+                    database.getReference().child("Messages").child(senderNode).push().setValue(model).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Toast.makeText(ChatDetailActivity.this, "Only one sided", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } else {
+                    database.getReference().child("Messages").child(senderNode).push()
+                            .setValue(model).addOnSuccessListener(unused -> database.getReference()
+                                    .child("Messages").child(recieverNode).push()
+                                    .setValue(model).addOnSuccessListener(unused1 -> {
 
-                                }));
+                                    }));
+                }
 
             } else {
                 edtChatting.setError("Message can't be send");
             }
         });
 
-        imgBackArrow.setOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
+        imgBackArrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ChatDetailActivity.this, MainActivity.class));
+                finish();
+            }
+        });
 
 
         edtChatting.addTextChangedListener(new TextWatcher() {

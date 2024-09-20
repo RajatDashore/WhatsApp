@@ -1,5 +1,7 @@
 package com.example.whatsappclone.Adapters;
 
+import static android.icu.text.DateFormat.ABBR_MONTH_DAY;
+
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -8,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -77,6 +80,7 @@ public class ChatAdapter extends RecyclerView.Adapter {
                                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                                 String senderID = FirebaseAuth.getInstance().getUid() + RecId;
                                 database.getReference().child("Messages").child(senderID).child(model.getMessageId()).setValue(null);
+                                Toast.makeText(context, "Message has been deleted", Toast.LENGTH_SHORT).show();
                             }
                         }).setNegativeButton("No", new DialogInterface.OnClickListener() {
                             @Override
@@ -130,14 +134,14 @@ public class ChatAdapter extends RecyclerView.Adapter {
         if (holder.getClass() == SenderViewHolder.class) {
             ((SenderViewHolder) holder).SenderMSg.setText(model.getMessage());
             Date date = new Date(model.getTimeStamp());
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy KK:mm aaa");
+            SimpleDateFormat dateFormat = new SimpleDateFormat(ABBR_MONTH_DAY + " KK:mm aaa");
             String strDate = dateFormat.format(date);
             ((SenderViewHolder) holder).STimeStamp.setText(strDate);
 
         } else {
             ((RecieverViewHolder) holder).RecieverMSg.setText(model.getMessage());
             Date date = new Date(model.getTimeStamp());
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy KK:mm aaa");
+            SimpleDateFormat dateFormat = new SimpleDateFormat(ABBR_MONTH_DAY + "KK:mm aa");
             String strDate = dateFormat.format(date);
             ((RecieverViewHolder) holder).rTimeStamp.setText(strDate);
         }

@@ -25,7 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 
-public class ChatsFragments extends Fragment {
+public class ChatsFragments extends Fragment implements Runnable {
 
 
     private final ArrayList<Users> list = new ArrayList<>();
@@ -45,13 +45,20 @@ public class ChatsFragments extends Fragment {
         Intent i = new Intent(getContext(), BlockedContacts.class);
         i.putExtra("list", list);
 
-
+        run();
         binding.chatRecyclerViewFragments.setAdapter(usersAdapter);
         FirebaseDatabase Fdatabase = FirebaseDatabase.getInstance();
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         binding.chatRecyclerViewFragments.setLayoutManager(layoutManager);
 
+        return binding.getRoot();
 
+    }
+
+
+    @Override
+    public void run() {
+        FirebaseDatabase Fdatabase = FirebaseDatabase.getInstance();
         Fdatabase.getReference().child("Users").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -74,8 +81,5 @@ public class ChatsFragments extends Fragment {
 
             }
         });
-
-        return binding.getRoot();
-
     }
 }

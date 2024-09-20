@@ -1,5 +1,7 @@
 package com.example.whatsappclone.Adapters;
 
+import static android.icu.text.DateFormat.ABBR_MONTH_DAY;
+
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -65,6 +67,9 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.MyViewHolder
             holder.name.setText(users.getUserName());
         }
         RvAnimation(holder.itemView, position);
+        if (users.getUserId().equals(FirebaseAuth.getInstance().getUid())) {
+            holder.name.setText(users.getUserName() + "(You)");
+        }
 
         Picasso.get().load(users.getProPicture()).placeholder(R.drawable.person).into(holder.imageView);
 
@@ -80,7 +85,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.MyViewHolder
                                 holder.lastMessage.setText(ds.child("message").getValue(String.class));
                                 Long timestamp = ds.child("timeStamp").getValue(Long.class);
                                 if (timestamp != null) {
-                                    @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("h:mm aaa", Locale.getDefault());
+                                    @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat(ABBR_MONTH_DAY + "/KK:mm aaa", Locale.getDefault());
                                     holder.time.setText(sdf.format(new Date(timestamp)));
                                 } else {
                                     holder.time.setText("");

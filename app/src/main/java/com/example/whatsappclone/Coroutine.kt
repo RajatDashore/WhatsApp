@@ -9,27 +9,27 @@ import kotlinx.coroutines.yield
 
 
 fun main() {
-    val obj = Coroutins()
+    val obj = Coroutine()
     obj.scope()
 }
 
-private class Coroutins {
+private class Coroutine {
     fun scope() {
         CoroutineScope(Dispatchers.Default).launch {
-            Task1()
+            task1()
         }
         CoroutineScope(Dispatchers.Default).launch {
-            Task2()
+            task2()
         }
     }
 
-    suspend fun Task1() {
+    suspend fun task1() {
         Log.d("hello", "Starting Task1...")
         yield()
         Log.d(TAG, "Ending Task2...")
     }
 
-    suspend fun Task2() {
+    suspend fun task2() {
         Log.d("hello", "Task2 Starting...")
         yield()
         Log.d("hello", "Task2 Ending")

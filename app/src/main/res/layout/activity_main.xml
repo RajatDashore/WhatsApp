@@ -40,5 +40,22 @@
         app:tabSelectedTextColor="@color/Lightgreen"
         app:tabTextColor="@color/black" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatButton"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/currency_bg"
+        android:backgroundTint="@color/green"
+        android:importantForAccessibility="no"
+        android:paddingEnd="@dimen/_3sdp"
+        android:src="@drawable/baseline_person_add_24"
+        app:layout_constraintBottom_toTopOf="@id/tabLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="ImageContrastCheck,RtlSymmetry,SpeakableTextPresentCheck" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

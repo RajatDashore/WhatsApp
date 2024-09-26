@@ -74,7 +74,11 @@ public class ChatAdapter extends RecyclerView.Adapter {
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                new AlertDialog.Builder(context).setIcon(R.drawable.baseline_delete_24).setTitle("Delete for me").setMessage("Are you sure you want to delete").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                new AlertDialog.Builder(context).setIcon(R.drawable.baseline_delete_24)
+                        .setCancelable(false)
+                        .setTitle("Delete the message")
+                        .setMessage("Are you sure you want to delete ?")
+                        .setPositiveButton("Delete for me", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -82,20 +86,20 @@ public class ChatAdapter extends RecyclerView.Adapter {
                                 database.getReference().child("Messages").child(senderID).child(model.getMessageId()).setValue(null);
                                 Toast.makeText(context, "Message has been deleted", Toast.LENGTH_SHORT).show();
                             }
-                        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        })
-                        .setNeutralButton("Delete for everyone", new DialogInterface.OnClickListener() {
+                        }).setNegativeButton("Delete for everyone", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 String senderId = FirebaseAuth.getInstance().getUid() + RecId;
                                 String recId = RecId + FirebaseAuth.getInstance().getUid();
                                 FirebaseDatabase.getInstance().getReference().child("Messages").child(senderId).child(model.getMessageId()).setValue(null);
                                 FirebaseDatabase.getInstance().getReference().child("Messages").child(recId).child(model.getMessageId()).setValue(null);
-                                dialog.cancel();
+                                dialog.dismiss();
+                            }
+                        })
+                        .setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
                             }
                         }).show();
                 return false;
@@ -141,7 +145,7 @@ public class ChatAdapter extends RecyclerView.Adapter {
         } else {
             ((RecieverViewHolder) holder).RecieverMSg.setText(model.getMessage());
             Date date = new Date(model.getTimeStamp());
-            SimpleDateFormat dateFormat = new SimpleDateFormat(ABBR_MONTH_DAY + "KK:mm aa");
+            SimpleDateFormat dateFormat = new SimpleDateFormat(ABBR_MONTH_DAY + " KK:mm aa");
             String strDate = dateFormat.format(date);
             ((RecieverViewHolder) holder).rTimeStamp.setText(strDate);
         }

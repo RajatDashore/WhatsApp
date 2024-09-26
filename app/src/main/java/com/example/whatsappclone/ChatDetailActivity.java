@@ -140,7 +140,7 @@ public class ChatDetailActivity extends AppCompatActivity {
                 chatRecyclerView.smoothScrollToPosition(messagesModel.size());
                 MediaPlayer player = MediaPlayer.create(getApplicationContext(), R.raw.what_popup);
                 player.start();
-                if (FirebaseAuth.getInstance().getUid().equals(recieveid)) {
+                if (Objects.equals(FirebaseAuth.getInstance().getUid(), recieveid)) {
                     database.getReference().child("Messages").child(senderNode).push().setValue(model).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
@@ -148,12 +148,9 @@ public class ChatDetailActivity extends AppCompatActivity {
                         }
                     });
                 } else {
-                    database.getReference().child("Messages").child(senderNode).push()
-                            .setValue(model).addOnSuccessListener(unused -> database.getReference()
-                                    .child("Messages").child(recieverNode).push()
-                                    .setValue(model).addOnSuccessListener(unused1 -> {
+                    database.getReference().child("Messages").child(senderNode).push().setValue(model).addOnSuccessListener(unused -> database.getReference().child("Messages").child(recieverNode).push().setValue(model).addOnSuccessListener(unused1 -> {
 
-                                    }));
+                    }));
                 }
 
             } else {
@@ -184,6 +181,7 @@ public class ChatDetailActivity extends AppCompatActivity {
                     imgDoller.setVisibility(View.GONE);
                     imgCamera.setVisibility(View.GONE);
                     edtChatting.setEms(12);
+
                 } else {
                     send.setVisibility(View.GONE);
                     recording.setVisibility(View.VISIBLE);

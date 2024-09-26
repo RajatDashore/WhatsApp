@@ -131,6 +131,7 @@ public class ChatDetailActivity extends AppCompatActivity {
             }
         });
 
+        String randomKey = database.getReference().push().getKey();
         send.setOnClickListener(v -> {
             String message = edtChatting.getText().toString();
             if (!message.trim().isEmpty()) {
@@ -141,14 +142,14 @@ public class ChatDetailActivity extends AppCompatActivity {
                 MediaPlayer player = MediaPlayer.create(getApplicationContext(), R.raw.what_popup);
                 player.start();
                 if (Objects.equals(FirebaseAuth.getInstance().getUid(), recieveid)) {
-                    database.getReference().child("Messages").child(senderNode).push().setValue(model).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    database.getReference().child("Messages").child(senderNode).child(randomKey).setValue(model).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
                             Toast.makeText(ChatDetailActivity.this, "Only one sided", Toast.LENGTH_SHORT).show();
                         }
                     });
                 } else {
-                    database.getReference().child("Messages").child(senderNode).push().setValue(model).addOnSuccessListener(unused -> database.getReference().child("Messages").child(recieverNode).push().setValue(model).addOnSuccessListener(unused1 -> {
+                    database.getReference().child("Messages").child(senderNode).child(randomKey).setValue(model).addOnSuccessListener(unused -> database.getReference().child("Messages").child(recieverNode).push().setValue(model).addOnSuccessListener(unused1 -> {
 
                     }));
                 }

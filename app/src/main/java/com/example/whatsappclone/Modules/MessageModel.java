@@ -2,6 +2,7 @@ package com.example.whatsappclone.Modules;
 
 public class MessageModel {
 
+    private long feeling;
     private String uID, message, messageId, senderId;
     private Long timeStamp;
 
@@ -9,6 +10,10 @@ public class MessageModel {
         this.uID = uID;
         this.message = message;
         this.timeStamp = timeStamp;
+    }
+
+    public MessageModel(int feeling) {
+        this.feeling = feeling;
     }
 
     public MessageModel(String messageId, String senderId, String message) {
@@ -25,6 +30,14 @@ public class MessageModel {
 
     public MessageModel() {
 
+    }
+
+    public long getFeeling() {
+        return feeling;
+    }
+
+    public void setFeeling(int feeling) {
+        this.feeling = feeling;
     }
 
     public String getMessageId() {

@@ -30,5 +30,14 @@
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal" />
 
+    <ImageView
+        android:id="@+id/recieverReaction"
+        android:layout_width="@dimen/_12sdp"
+        android:layout_height="@dimen/_12sdp"
+        android:layout_alignLeft="@id/TimeStampReciever"
+        android:layout_alignBottom="@id/TimeStampReciever"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:src="@drawable/emozy_sad"
+        android:visibility="gone" />
 
 </RelativeLayout>

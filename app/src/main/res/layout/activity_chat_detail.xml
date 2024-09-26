@@ -142,7 +142,7 @@
                 android:layout_width="@dimen/_22sdp"
                 android:layout_height="@dimen/_22sdp"
                 android:layout_marginStart="5dp"
-                android:src="@drawable/emoji"
+                android:src="@drawable/emoji_red_eye"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/guideline"
                 app:layout_constraintHorizontal_bias="1.0"

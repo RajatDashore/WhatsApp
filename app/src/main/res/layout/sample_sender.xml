@@ -10,6 +10,7 @@
 
 
     <LinearLayout
+        android:id="@+id/Linear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -42,9 +43,17 @@
             android:textSize="@dimen/_8ssp"
             android:textStyle="normal"
             tools:ignore="ObsoleteLayoutParam" />
-
-
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/SendReation"
+        android:layout_width="@dimen/_12sdp"
+        android:layout_height="@dimen/_12sdp"
+        android:layout_alignLeft="@id/Linear"
+        android:layout_alignBottom="@id/Linear"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:src="@drawable/emoji_laugh"
+        android:visibility="gone" />
 
 
 </RelativeLayout>

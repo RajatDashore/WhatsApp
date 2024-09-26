@@ -104,5 +104,5 @@ dependencies {
     //implementation("com.github.emreesen27:Android-Custom-Toast-Message:1.0.5")
 
     // Reaction
-    implementation("com.github.pgreze:android-reactions:1.0")
+    implementation("com.github.pgreze:android-reactions:1.6")
 }

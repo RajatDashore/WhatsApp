@@ -3,20 +3,22 @@ package com.example.whatsappclone.Adapters;
 import static android.icu.text.DateFormat.ABBR_MONTH_DAY;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.whatsappclone.Modules.MessageModel;
 import com.example.whatsappclone.R;
+import com.github.pgreze.reactions.ReactionPopup;
+import com.github.pgreze.reactions.ReactionsConfig;
+import com.github.pgreze.reactions.ReactionsConfigBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -30,7 +32,7 @@ public class ChatAdapter extends RecyclerView.Adapter {
     private final ArrayList<MessageModel> list;
     private final int SENDER = 1;
     private final int RECIEVER = 2;
-    private String RecId;
+    private final String RecId;
 
 
     public ChatAdapter(String recId, Context context, ArrayList<MessageModel> list) {
@@ -39,10 +41,6 @@ public class ChatAdapter extends RecyclerView.Adapter {
         this.list = list;
     }
 
-    public ChatAdapter(Context context, ArrayList<MessageModel> list) {
-        this.context = context;
-        this.list = list;
-    }
 
     @NonNull
     @Override
@@ -71,7 +69,7 @@ public class ChatAdapter extends RecyclerView.Adapter {
         MessageModel model = list.get(position);
         // to delete the chats from the ChatRecyclerView
 
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+          /* holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 new AlertDialog.Builder(context).setIcon(R.drawable.baseline_delete_24)
@@ -105,7 +103,8 @@ public class ChatAdapter extends RecyclerView.Adapter {
                 return false;
             }
         });
-//        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+           */
+        //        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
 //            @Override
 //            public boolean onLongClick(View v) {
 //                MessageModel model1;
@@ -134,6 +133,28 @@ public class ChatAdapter extends RecyclerView.Adapter {
 //            }
 //        });
 
+        int[] reaction = (new int[]{R.drawable.baseline_emoji_emotions_24, R.drawable.emoji_laugh, R.drawable.emoji_red_eye, R.drawable.confused, R.drawable.emozy_sad,});
+        ReactionsConfig config = new ReactionsConfigBuilder(context).withReactions(reaction).build();
+
+        ReactionPopup popup = new ReactionPopup(context, config, (pos) -> {
+            if (holder.getClass() == SenderViewHolder.class) {
+                SenderViewHolder viewHolder = (SenderViewHolder) holder;
+                viewHolder.SendReation.setImageResource(reaction[pos]);
+                viewHolder.SendReation.setVisibility(View.VISIBLE);
+            } else {
+                RecieverViewHolder viewHolder = (RecieverViewHolder) holder;
+                viewHolder.RecieverReaction.setImageResource(reaction[pos]);
+                viewHolder.RecieverReaction.setVisibility(View.VISIBLE);
+            }
+
+            model.setFeeling(pos);
+            FirebaseDatabase.getInstance().getReference().child("Messages").child(FirebaseAuth.getInstance().getUid()).child(FirebaseAuth.getInstance().getUid() + RecId).child(model.getMessageId()).setValue(model.getFeeling());
+
+            FirebaseDatabase.getInstance().getReference().child("Messages").child(FirebaseAuth.getInstance().getUid()).child(RecId + FirebaseAuth.getInstance().getUid()).child(model.getMessageId()).setValue(model.getFeeling());
+
+            return true; // true is closing popup, false is requesting a new selection
+        });
+
 
         if (holder.getClass() == SenderViewHolder.class) {
             ((SenderViewHolder) holder).SenderMSg.setText(model.getMessage());
@@ -141,6 +162,20 @@ public class ChatAdapter extends RecyclerView.Adapter {
             SimpleDateFormat dateFormat = new SimpleDateFormat(ABBR_MONTH_DAY + " KK:mm aaa");
             String strDate = dateFormat.format(date);
             ((SenderViewHolder) holder).STimeStamp.setText(strDate);
+            SenderViewHolder viewHolder = (SenderViewHolder) holder;
+            viewHolder.itemView.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent event) {
+                    popup.onTouch(view, event);
+                    return false;
+                }
+            });
+            if (model.getFeeling() >= 1) {
+                model.setFeeling(reaction[(int) model.getFeeling()]);
+                viewHolder.SendReation.setVisibility(View.VISIBLE);
+            } else {
+                viewHolder.SendReation.setVisibility(View.GONE);
+            }
 
         } else {
             ((RecieverViewHolder) holder).RecieverMSg.setText(model.getMessage());
@@ -148,9 +183,21 @@ public class ChatAdapter extends RecyclerView.Adapter {
             SimpleDateFormat dateFormat = new SimpleDateFormat(ABBR_MONTH_DAY + " KK:mm aa");
             String strDate = dateFormat.format(date);
             ((RecieverViewHolder) holder).rTimeStamp.setText(strDate);
+            RecieverViewHolder viewHolder = (RecieverViewHolder) holder;
+            viewHolder.itemView.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    popup.onTouch(v, event);
+                    return false;
+                }
+            });
+            if (model.getFeeling() >= 1) {
+                model.setFeeling(reaction[(int) model.getFeeling()]);
+                viewHolder.RecieverReaction.setVisibility(View.VISIBLE);
+            } else {
+                viewHolder.RecieverReaction.setVisibility(View.GONE);
+            }
         }
-
-
     }
 
 
@@ -162,23 +209,27 @@ public class ChatAdapter extends RecyclerView.Adapter {
 
     public static class SenderViewHolder extends RecyclerView.ViewHolder {
         TextView SenderMSg, STimeStamp;
+        ImageView SendReation;
 
         public SenderViewHolder(@NonNull View itemView) {
             super(itemView);
             SenderMSg = itemView.findViewById(R.id.SenderMessage);
             STimeStamp = itemView.findViewById(R.id.TimeStampSender);
+            SendReation = itemView.findViewById(R.id.SendReation);
         }
     }
 
 
     public static class RecieverViewHolder extends RecyclerView.ViewHolder {
         TextView RecieverMSg, rTimeStamp;
+        ImageView RecieverReaction;
 
         public RecieverViewHolder(@NonNull View itemView) {
             super(itemView);
 
             RecieverMSg = itemView.findViewById(R.id.RecievedMessage);
             rTimeStamp = itemView.findViewById(R.id.TimeStampReciever);
+            RecieverReaction = itemView.findViewById(R.id.recieverReaction);
         }
     }
 

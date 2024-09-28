@@ -2,9 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/helloWorld"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/whatsapp_orgnl_bg"
+    android:background="@drawable/whatsapp_big_bg"
     tools:context=".ChatDetailActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -142,7 +143,7 @@
                 android:layout_width="@dimen/_22sdp"
                 android:layout_height="@dimen/_22sdp"
                 android:layout_marginStart="5dp"
-                android:src="@drawable/emoji_red_eye"
+                android:src="@drawable/emoji"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/guideline"
                 app:layout_constraintHorizontal_bias="1.0"

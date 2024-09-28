@@ -1,7 +1,5 @@
 package com.example.whatsappclone.Adapters;
 
-import static android.icu.text.DateFormat.ABBR_MONTH_DAY;
-
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -32,8 +30,8 @@ import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -84,11 +82,22 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.MyViewHolder
                             for (DataSnapshot ds : snapshot.getChildren()) {
                                 holder.lastMessage.setText(ds.child("message").getValue(String.class));
                                 Long timestamp = ds.child("timeStamp").getValue(Long.class);
-                                if (timestamp != null) {
-                                    @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat(ABBR_MONTH_DAY + "/KK:mm aaa", Locale.getDefault());
-                                    holder.time.setText(sdf.format(new Date(timestamp)));
+                                Calendar now = Calendar.getInstance();
+                                Date date = new Date(timestamp);
+                                if (timestamp.longValue() == now.getTimeInMillis()) {
+                                    @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat(" h:mm aaa");
+                                    String strDate = dateFormat.format(date);
+                                    holder.time.setText(strDate);
+                                } else if (now.getTimeInMillis() - date.getTime() == 1) {
+                                    holder.time.setText("yesterday");
+                                } else if (now.get(Calendar.YEAR) - date.getYear() == 1) {
+                                    holder.time.setText("MMMM YYYY");
+                                } else if (now.get(Calendar.MONTH) - date.getMonth() == 1) {
+                                    holder.time.setText(" d MMMM");
                                 } else {
-                                    holder.time.setText("");
+                                    @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat(" h:mm aaa");
+                                    String strDate = dateFormat.format(date);
+                                    holder.time.setText(strDate);
                                 }
                             }
                         }

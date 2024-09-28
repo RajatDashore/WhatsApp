@@ -3,27 +3,29 @@ package com.example.whatsappclone.Adapters;
 import static android.icu.text.DateFormat.ABBR_MONTH_DAY;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.os.Build;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.whatsappclone.Modules.MessageModel;
 import com.example.whatsappclone.R;
-import com.github.pgreze.reactions.ReactionPopup;
-import com.github.pgreze.reactions.ReactionsConfig;
-import com.github.pgreze.reactions.ReactionsConfigBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class ChatAdapter extends RecyclerView.Adapter {
@@ -64,12 +66,14 @@ public class ChatAdapter extends RecyclerView.Adapter {
     }
 
 
+    @SuppressLint("ClickableViewAccessibility")
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         MessageModel model = list.get(position);
         // to delete the chats from the ChatRecyclerView
 
-          /* holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 new AlertDialog.Builder(context).setIcon(R.drawable.baseline_delete_24)
@@ -103,7 +107,7 @@ public class ChatAdapter extends RecyclerView.Adapter {
                 return false;
             }
         });
-           */
+
         //        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
 //            @Override
 //            public boolean onLongClick(View v) {
@@ -133,70 +137,78 @@ public class ChatAdapter extends RecyclerView.Adapter {
 //            }
 //        });
 
-        int[] reaction = (new int[]{R.drawable.baseline_emoji_emotions_24, R.drawable.emoji_laugh, R.drawable.emoji_red_eye, R.drawable.confused, R.drawable.emozy_sad,});
-        ReactionsConfig config = new ReactionsConfigBuilder(context).withReactions(reaction).build();
-
-        ReactionPopup popup = new ReactionPopup(context, config, (pos) -> {
-            if (holder.getClass() == SenderViewHolder.class) {
-                SenderViewHolder viewHolder = (SenderViewHolder) holder;
-                viewHolder.SendReation.setImageResource(reaction[pos]);
-                viewHolder.SendReation.setVisibility(View.VISIBLE);
-            } else {
-                RecieverViewHolder viewHolder = (RecieverViewHolder) holder;
-                viewHolder.RecieverReaction.setImageResource(reaction[pos]);
-                viewHolder.RecieverReaction.setVisibility(View.VISIBLE);
-            }
-
-            model.setFeeling(pos);
-            FirebaseDatabase.getInstance().getReference().child("Messages").child(FirebaseAuth.getInstance().getUid()).child(FirebaseAuth.getInstance().getUid() + RecId).child(model.getMessageId()).setValue(model.getFeeling());
-
-            FirebaseDatabase.getInstance().getReference().child("Messages").child(FirebaseAuth.getInstance().getUid()).child(RecId + FirebaseAuth.getInstance().getUid()).child(model.getMessageId()).setValue(model.getFeeling());
-
-            return true; // true is closing popup, false is requesting a new selection
-        });
+//        int[] reaction = (new int[]{R.drawable.baseline_emoji_emotions_24, R.drawable.emoji_laugh, R.drawable.emoji_red_eye, R.drawable.confused, R.drawable.emozy_sad,});
+//        ReactionsConfig config = new ReactionsConfigBuilder(context).withReactions(reaction).build();
+//
+//        ReactionPopup popup = new ReactionPopup(context, config, (pos) -> {
+//            if (holder.getClass() == SenderViewHolder.class) {
+//                SenderViewHolder viewHolder = (SenderViewHolder) holder;
+//                viewHolder.SendReaction.setImageResource(reaction[pos]);
+//                viewHolder.SendReaction.setVisibility(View.VISIBLE);
+//            } else {
+//                RecieverViewHolder viewHolder = (RecieverViewHolder) holder;
+//                viewHolder.RecieverReaction.setImageResource(reaction[pos]);
+//                viewHolder.RecieverReaction.setVisibility(View.VISIBLE);
+//            }
+//
+//            model.setFeeling(pos);
+//            FirebaseDatabase.getInstance().getReference().child("Messages").child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid())).child(FirebaseAuth.getInstance().getUid() + RecId).child(model.getMessageId()).setValue(model.getFeeling());
+//
+//            FirebaseDatabase.getInstance().getReference().child("Messages").child(FirebaseAuth.getInstance().getUid()).child(RecId + FirebaseAuth.getInstance().getUid()).child(model.getMessageId()).setValue(model.getFeeling());
+//
+//            return true; // true is closing popup, false is requesting a new selection
+//        });
 
 
         if (holder.getClass() == SenderViewHolder.class) {
             ((SenderViewHolder) holder).SenderMSg.setText(model.getMessage());
+            Calendar now = Calendar.getInstance();
             Date date = new Date(model.getTimeStamp());
-            SimpleDateFormat dateFormat = new SimpleDateFormat(ABBR_MONTH_DAY + " KK:mm aaa");
-            String strDate = dateFormat.format(date);
-            ((SenderViewHolder) holder).STimeStamp.setText(strDate);
-            SenderViewHolder viewHolder = (SenderViewHolder) holder;
-            viewHolder.itemView.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View view, MotionEvent event) {
-                    popup.onTouch(view, event);
-                    return false;
-                }
-            });
-            if (model.getFeeling() >= 1) {
-                model.setFeeling(reaction[(int) model.getFeeling()]);
-                viewHolder.SendReation.setVisibility(View.VISIBLE);
+            if (date.getTime() == now.getTimeInMillis()) {
+                @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat(" h:mm aaa");
+                String strDate = dateFormat.format(date);
+                ((SenderViewHolder) holder).STimeStamp.setText(strDate);
+            } else if (now.getTimeInMillis() - date.getTime() == 1) {
+                ((SenderViewHolder) holder).STimeStamp.setText("yesterday");
+            } else if (now.get(Calendar.YEAR) - date.getYear() == 1) {
+                ((SenderViewHolder) holder).STimeStamp.setText("MMMM YYYY");
+            } else if (now.get(Calendar.MONTH) - date.getMonth() == 1) {
+                ((SenderViewHolder) holder).STimeStamp.setText(" d MMMM");
             } else {
-                viewHolder.SendReation.setVisibility(View.GONE);
+                @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat(" h:mm aaa");
+                String strDate = dateFormat.format(date);
+                ((SenderViewHolder) holder).STimeStamp.setText(strDate);
             }
+
+//            SenderViewHolder viewHolder = (SenderViewHolder) holder;
+//            viewHolder.itemView.setOnTouchListener((view, event) -> {
+//                popup.onTouch(view, event);
+//                return false;
+//            });
+//            if (model.getFeeling() >= 1) {
+//                model.setFeeling(reaction[(int) model.getFeeling()]);
+//                viewHolder.SendReaction.setVisibility(View.VISIBLE);
+//            } else {
+//                viewHolder.SendReaction.setVisibility(View.GONE);
+//            }
 
         } else {
             ((RecieverViewHolder) holder).RecieverMSg.setText(model.getMessage());
             Date date = new Date(model.getTimeStamp());
-            SimpleDateFormat dateFormat = new SimpleDateFormat(ABBR_MONTH_DAY + " KK:mm aa");
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat(ABBR_MONTH_DAY + " KK:mm aa");
             String strDate = dateFormat.format(date);
             ((RecieverViewHolder) holder).rTimeStamp.setText(strDate);
-            RecieverViewHolder viewHolder = (RecieverViewHolder) holder;
-            viewHolder.itemView.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    popup.onTouch(v, event);
-                    return false;
-                }
-            });
-            if (model.getFeeling() >= 1) {
-                model.setFeeling(reaction[(int) model.getFeeling()]);
-                viewHolder.RecieverReaction.setVisibility(View.VISIBLE);
-            } else {
-                viewHolder.RecieverReaction.setVisibility(View.GONE);
-            }
+//            RecieverViewHolder viewHolder = (RecieverViewHolder) holder;
+//            viewHolder.itemView.setOnTouchListener((v, event) -> {
+//                popup.onTouch(v, event);
+//                return false;
+//            });
+//            if (model.getFeeling() >= 1) {
+//                model.setFeeling(reaction[(int) model.getFeeling()]);
+//                viewHolder.RecieverReaction.setVisibility(View.VISIBLE);
+//            } else {
+//                viewHolder.RecieverReaction.setVisibility(View.GONE);
+//            }
         }
     }
 
@@ -209,13 +221,13 @@ public class ChatAdapter extends RecyclerView.Adapter {
 
     public static class SenderViewHolder extends RecyclerView.ViewHolder {
         TextView SenderMSg, STimeStamp;
-        ImageView SendReation;
+        ImageView SendReaction;
 
         public SenderViewHolder(@NonNull View itemView) {
             super(itemView);
             SenderMSg = itemView.findViewById(R.id.SenderMessage);
             STimeStamp = itemView.findViewById(R.id.TimeStampSender);
-            SendReation = itemView.findViewById(R.id.SendReation);
+            SendReaction = itemView.findViewById(R.id.SendReation);
         }
     }
 

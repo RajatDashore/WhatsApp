@@ -14,6 +14,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,6 +54,7 @@ public class ChatDetailActivity extends AppCompatActivity {
             Intent i = new Intent(ChatDetailActivity.this, CapturedImage.class);
             i.putExtra("bitMap", map);
             startActivity(i);
+            finish();
         }
     });
 
@@ -131,7 +133,6 @@ public class ChatDetailActivity extends AppCompatActivity {
             }
         });
 
-        String randomKey = database.getReference().push().getKey();
         send.setOnClickListener(v -> {
             String message = edtChatting.getText().toString();
             if (!message.trim().isEmpty()) {
@@ -142,18 +143,16 @@ public class ChatDetailActivity extends AppCompatActivity {
                 MediaPlayer player = MediaPlayer.create(getApplicationContext(), R.raw.what_popup);
                 player.start();
                 if (Objects.equals(FirebaseAuth.getInstance().getUid(), recieveid)) {
-                    database.getReference().child("Messages").child(senderNode).child(randomKey).setValue(model).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    database.getReference().child("Messages").child(senderNode).push().setValue(model).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
                             Toast.makeText(ChatDetailActivity.this, "Only one sided", Toast.LENGTH_SHORT).show();
                         }
                     });
                 } else {
-                    database.getReference().child("Messages").child(senderNode).child(randomKey).setValue(model).addOnSuccessListener(unused -> database.getReference().child("Messages").child(recieverNode).push().setValue(model).addOnSuccessListener(unused1 -> {
-
+                    database.getReference().child("Messages").child(senderNode).push().setValue(model).addOnSuccessListener(it -> database.getReference().child("Messages").child(recieverNode).push().setValue(model).addOnSuccessListener(unused1 -> {
                     }));
                 }
-
             } else {
                 edtChatting.setError("Message can't be send");
             }
@@ -167,7 +166,7 @@ public class ChatDetailActivity extends AppCompatActivity {
             }
         });
 
-
+        RelativeLayout layout = findViewById(R.id.helloWorld);
         edtChatting.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -182,6 +181,7 @@ public class ChatDetailActivity extends AppCompatActivity {
                     imgDoller.setVisibility(View.GONE);
                     imgCamera.setVisibility(View.GONE);
                     edtChatting.setEms(12);
+                    layout.setBackgroundResource(R.drawable.whatsapp_big_bg);
 
                 } else {
                     send.setVisibility(View.GONE);
@@ -189,14 +189,13 @@ public class ChatDetailActivity extends AppCompatActivity {
                     imgDoller.setVisibility(View.VISIBLE);
                     imgCamera.setVisibility(View.VISIBLE);
                     edtChatting.setEms(6);
+                    layout.setBackgroundResource(R.drawable.whatsapp_orgnl_bg);
                 }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (edtChatting.getLineCount() == edtChatting.getMaxLines()) {
-                    edtChatting.setMaxLines(edtChatting.getLineCount() + 1);
-                }
+
             }
         });
 

@@ -15,7 +15,6 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.whatsappclone.Modules.Users;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -27,6 +26,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import java.util.HashMap;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -51,8 +51,10 @@ public class Settings extends AppCompatActivity {
                             reference.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                 @Override
                                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                    database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid()).child("proPicture")
-                                            .setValue(imageUri);
+                                    HashMap<String, Object> map = new HashMap<>();
+                                    map.put("proPicture", imageUri);
+                                    database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid())
+                                            .setValue(map);
                                     Toast.makeText(Settings.this, "Image in fDataBase", Toast.LENGTH_SHORT).show();
                                 }
                             });
@@ -82,8 +84,8 @@ public class Settings extends AppCompatActivity {
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        Users users = snapshot.getValue(Users.class);
-                        Picasso.get().load(users.getProPicture()).placeholder(R.drawable.person).into(imgPerson);
+                        String img = snapshot.child("proPicture").getValue(String.class);
+                        Picasso.get().load(img).placeholder(R.drawable.person).into(imgPerson);
                         Toast.makeText(Settings.this, "Hello Photo", Toast.LENGTH_SHORT).show();
                     }
 

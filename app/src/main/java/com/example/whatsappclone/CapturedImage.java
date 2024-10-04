@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -30,12 +28,9 @@ public class CapturedImage extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(CapturedImage.this, ChatDetailActivity.class));
-                Animation anim = AnimationUtils.loadAnimation(CapturedImage.this, android.R.anim.fade_in);
-                anim.setDuration(1000);
+                // startActivity(new Intent(CapturedImage.this, ChatDetailActivity.class));
+                getOnBackPressedDispatcher().onBackPressed();
                 finish();
-                anim.start();
-                anim.cancel();
             }
         });
     }

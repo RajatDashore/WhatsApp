@@ -112,5 +112,5 @@ dependencies {
     implementation("com.github.3llomi:CircularStatusView:V1.0.3")
 
     //StoryView
-    implementation(" com.github.OMARIHAMZA:StoryView:1.0.2")
+    // implementation(" com.github.OMARIHAMZA:StoryView:1.0.2")
 }

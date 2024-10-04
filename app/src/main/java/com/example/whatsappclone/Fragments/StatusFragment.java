@@ -27,10 +27,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -71,9 +68,11 @@ public class StatusFragment extends Fragment {
                                     public void onSuccess(Uri uri) {
                                         String imageUrl = uri.toString();
                                         UserStatus userStatus = new UserStatus();
-                                        userStatus.setStatusName(users.getUserName());
-                                        userStatus.setStatusProfileImage(users.getProPicture());
-                                        userStatus.setLastUpdated(date.getTime());
+                                        if (users != null) {
+                                            userStatus.setStatusName(users.getUserName());
+                                            userStatus.setStatusProfileImage(users.getProPicture());
+                                            userStatus.setLastUpdated(date.getTime());
+                                        }
 
 
                                         Status status = new Status(imageUrl, userStatus.getLastUpdated());
@@ -136,7 +135,7 @@ public class StatusFragment extends Fragment {
         });
 
 
-        database.getReference().child("Status").addValueEventListener(new ValueEventListener() {
+    /*    database.getReference().child("Status").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
@@ -165,7 +164,7 @@ public class StatusFragment extends Fragment {
 
             }
         });
-
+*/
         return binding.getRoot();
     }
 }

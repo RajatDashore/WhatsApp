@@ -54,7 +54,6 @@ public class ChatDetailActivity extends AppCompatActivity {
             Intent i = new Intent(ChatDetailActivity.this, CapturedImage.class);
             i.putExtra("bitMap", map);
             startActivity(i);
-            finish();
         }
     });
 

@@ -4,6 +4,11 @@ public class Status {
     private String ImageUrl;
     private long timeStamp;
 
+    public Status(String imageUrl, long timeStamp) {
+        ImageUrl = imageUrl;
+        this.timeStamp = timeStamp;
+    }
+
     public String getImageUrl() {
         return ImageUrl;
     }

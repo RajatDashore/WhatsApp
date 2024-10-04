@@ -8,11 +8,12 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/myStatus"
-        android:layout_width="@dimen/_50sdp"
-        android:layout_height="@dimen/_50sdp"
+        android:layout_width="@dimen/_55sdp"
+        android:layout_height="@dimen/_55sdp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/pro_picture_bg"
+        android:foreground="?selectableItemBackground"
         android:src="@drawable/person"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -25,6 +26,7 @@
         android:layout_width="@dimen/_22sdp"
         android:layout_height="@dimen/_22sdp"
         android:src="@drawable/icon_add"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/myStatus"
         app:layout_constraintEnd_toEndOf="@+id/myStatus"
         app:layout_constraintHorizontal_bias="1.0"

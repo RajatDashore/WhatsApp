@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.whatsappclone.Modules.UserStatus;
 import com.example.whatsappclone.R;
+import com.example.whatsappclone.databinding.ItemStatusViewBinding;
 
 import java.util.ArrayList;
 
@@ -33,6 +34,43 @@ public class TopStatusAdapter extends RecyclerView.Adapter<TopStatusAdapter.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
+        UserStatus userStatus = userStatuses.get(position);
+        /* holder.binding.circularStatusView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ArrayList<MyStory> myStories = new ArrayList<>();
+                for (Status status : userStatus.getStatusArrayList()) {
+                    myStories.add(new MyStory(status.getImageUrl()));
+                }
+                StoryView.Builder builder = new StoryView.Builder((StatusFragment)context));
+                builder.setStoriesList(myStories);
+                builder.setStoryDuration(5000);
+                builder.setTitleText(userStatus.getStatusName());
+                builder.setSubtitleText("");
+                builder.setTitleLogoUrl(userStatus.getStatusProfileImage());
+                builder.setStoryClickListeners(new StoryClickListeners() {
+                    @Override
+                    public void onDescriptionClickListener(int position) {
+                        //your action
+                    }
+
+                    @Override
+                    public void onTitleIconClickListener(int position) {
+                        //your action
+                    }
+                });
+                builder.build();
+                builder.show();// Required
+// Default is 2000 Millis (2 Seconds)
+// Default is Hidden
+// Default is Hidden
+// Default is Hidden
+// Optional Listeners
+// Must be called before calling show method
+
+            }
+        }); */
+
     }
 
     @Override
@@ -41,9 +79,11 @@ public class TopStatusAdapter extends RecyclerView.Adapter<TopStatusAdapter.View
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        ItemStatusViewBinding binding;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            binding = ItemStatusViewBinding.bind(itemView);
         }
     }
 }

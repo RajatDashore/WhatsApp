@@ -134,7 +134,7 @@ public class ChatDetailActivity extends AppCompatActivity {
         });
 
         send.setOnClickListener(v -> {
-            String message = edtChatting.getText().toString();
+            String message = edtChatting.getText().toString().trim();
             if (!message.trim().isEmpty()) {
                 final MessageModel model = new MessageModel(senderId, message);
                 model.setTimeStamp(new Date().getTime());

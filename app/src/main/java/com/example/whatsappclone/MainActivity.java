@@ -39,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
         Objects.requireNonNull(tabLayout.getTabAt(2)).setIcon(R.drawable.baseline_call_24);
 
         FirebaseUser user = auth.getCurrentUser();
-        Objects.requireNonNull(getSupportActionBar()).setTitle("WhatsApp");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Chatter");
+
 
         if (user == null) {
             Intent i = new Intent(MainActivity.this, SignUpActivity.class);

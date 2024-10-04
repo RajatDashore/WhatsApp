@@ -11,8 +11,8 @@
 
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="@dimen/_70sdp"
-        android:layout_height="@dimen/_70sdp"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
         android:layout_centerInParent="true"
         android:background="@drawable/pro_picture_bg"
         android:padding="6dp"

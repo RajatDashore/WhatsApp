@@ -1,4 +1,4 @@
-package com.example.whatsappclone.Fragments;
+/*package com.example.whatsappclone.Fragments;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -164,7 +164,7 @@ public class StatusFragment extends Fragment {
 
             }
         });
-*/
         return binding.getRoot();
     }
 }
+ */

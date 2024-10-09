@@ -1,3 +1,4 @@
+/*
 package com.example.whatsappclone;
 
 import androidx.room.Dao;
@@ -24,3 +25,4 @@ public interface DataBaseDAO {
     void update(String Uid, int id, String name, String email, String image);
 
 }
+*/

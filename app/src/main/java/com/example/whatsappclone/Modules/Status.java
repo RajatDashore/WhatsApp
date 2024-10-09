@@ -1,3 +1,4 @@
+/*
 package com.example.whatsappclone.Modules;
 
 public class Status {
@@ -25,3 +26,4 @@ public class Status {
         this.timeStamp = timeStamp;
     }
 }
+*/

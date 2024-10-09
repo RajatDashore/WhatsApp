@@ -1,4 +1,4 @@
-package com.example.whatsappclone.Adapters;
+/*package com.example.whatsappclone.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -67,3 +67,4 @@ public class BlockedAdapter extends RecyclerView.Adapter<BlockedAdapter.MyViewHo
         }
     }
 }
+*/

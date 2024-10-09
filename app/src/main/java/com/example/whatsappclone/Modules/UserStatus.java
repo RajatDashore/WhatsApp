@@ -1,4 +1,6 @@
+/*
 package com.example.whatsappclone.Modules;
+
 
 import java.util.ArrayList;
 
@@ -49,3 +51,4 @@ public class UserStatus {
         this.statusArrayList = statusArrayList;
     }
 }
+*/

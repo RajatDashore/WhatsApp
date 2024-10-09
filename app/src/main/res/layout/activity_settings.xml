@@ -122,232 +122,232 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/ConsAccount"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:elevation="1dp"
-        android:padding="@dimen/_10sdp"
-        app:layout_constraintTop_toBottomOf="@id/userDetail">
+    <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--        android:id="@+id/ConsAccount"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:background="@color/white"-->
+    <!--        android:elevation="1dp"-->
+    <!--        android:padding="@dimen/_10sdp"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/userDetail">-->
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/SampleproPicture"
-            android:layout_width="@dimen/_25sdp"
-            android:layout_height="@dimen/_25sdp"
-            android:layout_marginLeft="@dimen/_5sdp"
-            android:background="@color/white"
-            android:src="@drawable/baseline_key_24"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5" />
-
-
-        <TextView
-            android:id="@+id/SampleUserName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_8sdp"
-            android:maxLines="1"
-            android:paddingTop="@dimen/_2sdp"
-            android:text="Account"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_12ssp"
-            android:textStyle="normal"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@id/SampleproPicture"
-            app:layout_constraintTop_toTopOf="parent" />
+    <!--        <de.hdodenhof.circleimageview.CircleImageView-->
+    <!--            android:id="@+id/SampleproPicture"-->
+    <!--            android:layout_width="@dimen/_25sdp"-->
+    <!--            android:layout_height="@dimen/_25sdp"-->
+    <!--            android:layout_marginLeft="@dimen/_5sdp"-->
+    <!--            android:background="@color/white"-->
+    <!--            android:src="@drawable/baseline_key_24"-->
+    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--            app:layout_constraintStart_toStartOf="parent"-->
+    <!--            app:layout_constraintTop_toTopOf="parent"-->
+    <!--            app:layout_constraintVertical_bias="0.5" />-->
 
 
-        <TextView
-            android:id="@+id/lastMessage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_8sdp"
-            android:layout_marginRight="@dimen/_5sdp"
-            android:maxLines="1"
-            android:paddingTop="@dimen/_4sdp"
-            android:paddingBottom="@dimen/_2sdp"
-            android:text="Security notifications, change number"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_10ssp"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/SampleproPicture"
-            app:layout_constraintTop_toBottomOf="@id/SampleUserName" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <!--        <TextView-->
+    <!--            android:id="@+id/SampleUserName"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginLeft="@dimen/_8sdp"-->
+    <!--            android:maxLines="1"-->
+    <!--            android:paddingTop="@dimen/_2sdp"-->
+    <!--            android:text="Account"-->
+    <!--            android:textColor="@color/black"-->
+    <!--            android:textSize="@dimen/_12ssp"-->
+    <!--            android:textStyle="normal"-->
+    <!--            app:layout_constraintHorizontal_bias="0.0"-->
+    <!--            app:layout_constraintStart_toEndOf="@id/SampleproPicture"-->
+    <!--            app:layout_constraintTop_toTopOf="parent" />-->
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/ConsPrivacy"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:elevation="1dp"
-        android:padding="@dimen/_10sdp"
-        app:layout_constraintTop_toBottomOf="@id/ConsAccount">
+    <!--        <TextView-->
+    <!--            android:id="@+id/lastMessage"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginLeft="@dimen/_8sdp"-->
+    <!--            android:layout_marginRight="@dimen/_5sdp"-->
+    <!--            android:maxLines="1"-->
+    <!--            android:paddingTop="@dimen/_4sdp"-->
+    <!--            android:paddingBottom="@dimen/_2sdp"-->
+    <!--            android:text="Security notifications, change number"-->
+    <!--            android:textColor="@color/black"-->
+    <!--            android:textSize="@dimen/_10ssp"-->
+    <!--            app:layout_constraintHorizontal_bias="0.0"-->
+    <!--            app:layout_constraintStart_toEndOf="@+id/SampleproPicture"-->
+    <!--            app:layout_constraintTop_toBottomOf="@id/SampleUserName" />-->
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/lock"
-            android:layout_width="@dimen/_25sdp"
-            android:layout_height="@dimen/_25sdp"
-            android:layout_marginLeft="@dimen/_5sdp"
-            android:background="@color/white"
-            android:src="@drawable/baseline_lock_outline_24"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5" />
+    <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
 
 
-        <TextView
-            android:id="@+id/Privacy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_8sdp"
-            android:maxLines="1"
-            android:paddingTop="@dimen/_2sdp"
-            android:text="Privacy"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_12ssp"
-            android:textStyle="normal"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@id/lock"
-            app:layout_constraintTop_toTopOf="parent" />
+    <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--        android:id="@+id/ConsPrivacy"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:background="@color/white"-->
+    <!--        android:elevation="1dp"-->
+    <!--        android:padding="@dimen/_10sdp"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/ConsAccount">-->
+
+    <!--        <de.hdodenhof.circleimageview.CircleImageView-->
+    <!--            android:id="@+id/lock"-->
+    <!--            android:layout_width="@dimen/_25sdp"-->
+    <!--            android:layout_height="@dimen/_25sdp"-->
+    <!--            android:layout_marginLeft="@dimen/_5sdp"-->
+    <!--            android:background="@color/white"-->
+    <!--            android:src="@drawable/baseline_lock_outline_24"-->
+    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--            app:layout_constraintStart_toStartOf="parent"-->
+    <!--            app:layout_constraintTop_toTopOf="parent"-->
+    <!--            app:layout_constraintVertical_bias="0.5" />-->
 
 
-        <TextView
-            android:id="@+id/Security"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_8sdp"
-            android:layout_marginRight="@dimen/_5sdp"
-            android:maxLines="1"
-            android:paddingTop="@dimen/_4sdp"
-            android:paddingBottom="@dimen/_2sdp"
-            android:text="Block contacts, disappearing messages"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_10ssp"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@id/lock"
-            app:layout_constraintTop_toBottomOf="@id/Privacy" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <!--        <TextView-->
+    <!--            android:id="@+id/Privacy"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginLeft="@dimen/_8sdp"-->
+    <!--            android:maxLines="1"-->
+    <!--            android:paddingTop="@dimen/_2sdp"-->
+    <!--            android:text="Privacy"-->
+    <!--            android:textColor="@color/black"-->
+    <!--            android:textSize="@dimen/_12ssp"-->
+    <!--            android:textStyle="normal"-->
+    <!--            app:layout_constraintHorizontal_bias="0.0"-->
+    <!--            app:layout_constraintStart_toEndOf="@id/lock"-->
+    <!--            app:layout_constraintTop_toTopOf="parent" />-->
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/ConsAvatar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:elevation="1dp"
-        android:padding="@dimen/_10sdp"
-        app:layout_constraintTop_toBottomOf="@id/ConsPrivacy">
+    <!--        <TextView-->
+    <!--            android:id="@+id/Security"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginLeft="@dimen/_8sdp"-->
+    <!--            android:layout_marginRight="@dimen/_5sdp"-->
+    <!--            android:maxLines="1"-->
+    <!--            android:paddingTop="@dimen/_4sdp"-->
+    <!--            android:paddingBottom="@dimen/_2sdp"-->
+    <!--            android:text="Block contacts, disappearing messages"-->
+    <!--            android:textColor="@color/black"-->
+    <!--            android:textSize="@dimen/_10ssp"-->
+    <!--            app:layout_constraintHorizontal_bias="0.0"-->
+    <!--            app:layout_constraintStart_toEndOf="@id/lock"-->
+    <!--            app:layout_constraintTop_toBottomOf="@id/Privacy" />-->
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/Emoji"
-            android:layout_width="@dimen/_25sdp"
-            android:layout_height="@dimen/_25sdp"
-            android:layout_marginLeft="@dimen/_5sdp"
-            android:background="@color/white"
-            android:src="@drawable/emoji_red_eye"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5" />
+    <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
 
 
-        <TextView
-            android:id="@+id/Avatar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_8sdp"
-            android:maxLines="1"
-            android:paddingTop="@dimen/_2sdp"
-            android:text="Avatar"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_12ssp"
-            android:textStyle="normal"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@id/Emoji"
-            app:layout_constraintTop_toTopOf="parent" />
+    <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--        android:id="@+id/ConsAvatar"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:background="@color/white"-->
+    <!--        android:elevation="1dp"-->
+    <!--        android:padding="@dimen/_10sdp"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/ConsPrivacy">-->
+
+    <!--        <de.hdodenhof.circleimageview.CircleImageView-->
+    <!--            android:id="@+id/Emoji"-->
+    <!--            android:layout_width="@dimen/_25sdp"-->
+    <!--            android:layout_height="@dimen/_25sdp"-->
+    <!--            android:layout_marginLeft="@dimen/_5sdp"-->
+    <!--            android:background="@color/white"-->
+    <!--            android:src="@drawable/emoji_red_eye"-->
+    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--            app:layout_constraintStart_toStartOf="parent"-->
+    <!--            app:layout_constraintTop_toTopOf="parent"-->
+    <!--            app:layout_constraintVertical_bias="0.5" />-->
 
 
-        <TextView
-            android:id="@+id/Create"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_8sdp"
-            android:layout_marginRight="@dimen/_5sdp"
-            android:maxLines="1"
-            android:paddingTop="@dimen/_4sdp"
-            android:paddingBottom="@dimen/_2sdp"
-            android:text="Create, edit, profile photo"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_10ssp"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@id/Emoji"
-            app:layout_constraintTop_toBottomOf="@id/Avatar" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <!--        <TextView-->
+    <!--            android:id="@+id/Avatar"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginLeft="@dimen/_8sdp"-->
+    <!--            android:maxLines="1"-->
+    <!--            android:paddingTop="@dimen/_2sdp"-->
+    <!--            android:text="Avatar"-->
+    <!--            android:textColor="@color/black"-->
+    <!--            android:textSize="@dimen/_12ssp"-->
+    <!--            android:textStyle="normal"-->
+    <!--            app:layout_constraintHorizontal_bias="0.0"-->
+    <!--            app:layout_constraintStart_toEndOf="@id/Emoji"-->
+    <!--            app:layout_constraintTop_toTopOf="parent" />-->
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/ConsChats"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:elevation="1dp"
-        android:padding="@dimen/_10sdp"
-        app:layout_constraintTop_toBottomOf="@id/ConsAvatar">
+    <!--        <TextView-->
+    <!--            android:id="@+id/Create"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginLeft="@dimen/_8sdp"-->
+    <!--            android:layout_marginRight="@dimen/_5sdp"-->
+    <!--            android:maxLines="1"-->
+    <!--            android:paddingTop="@dimen/_4sdp"-->
+    <!--            android:paddingBottom="@dimen/_2sdp"-->
+    <!--            android:text="Create, edit, profile photo"-->
+    <!--            android:textColor="@color/black"-->
+    <!--            android:textSize="@dimen/_10ssp"-->
+    <!--            app:layout_constraintHorizontal_bias="0.0"-->
+    <!--            app:layout_constraintStart_toEndOf="@id/Emoji"-->
+    <!--            app:layout_constraintTop_toBottomOf="@id/Avatar" />-->
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/ChatI"
-            android:layout_width="@dimen/_25sdp"
-            android:layout_height="@dimen/_25sdp"
-            android:layout_marginLeft="@dimen/_5sdp"
-            android:background="@color/white"
-            android:src="@drawable/chats_setting"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5" />
+    <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
 
 
-        <TextView
-            android:id="@+id/Chats"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_8sdp"
-            android:maxLines="1"
-            android:paddingTop="@dimen/_2sdp"
-            android:text="Chats"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_12ssp"
-            android:textStyle="normal"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@id/ChatI"
-            app:layout_constraintTop_toTopOf="parent" />
+    <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--        android:id="@+id/ConsChats"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:background="@color/white"-->
+    <!--        android:elevation="1dp"-->
+    <!--        android:padding="@dimen/_10sdp"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/ConsAvatar">-->
+
+    <!--        <de.hdodenhof.circleimageview.CircleImageView-->
+    <!--            android:id="@+id/ChatI"-->
+    <!--            android:layout_width="@dimen/_25sdp"-->
+    <!--            android:layout_height="@dimen/_25sdp"-->
+    <!--            android:layout_marginLeft="@dimen/_5sdp"-->
+    <!--            android:background="@color/white"-->
+    <!--            android:src="@drawable/chats_setting"-->
+    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--            app:layout_constraintStart_toStartOf="parent"-->
+    <!--            app:layout_constraintTop_toTopOf="parent"-->
+    <!--            app:layout_constraintVertical_bias="0.5" />-->
 
 
-        <TextView
-            android:id="@+id/Theme"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_8sdp"
-            android:layout_marginRight="@dimen/_5sdp"
-            android:maxLines="1"
-            android:paddingTop="@dimen/_4sdp"
-            android:paddingBottom="@dimen/_2sdp"
-            android:text="Theme, wallpaper, chat history"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_10ssp"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@id/ChatI"
-            app:layout_constraintTop_toBottomOf="@id/Chats" />
+    <!--        <TextView-->
+    <!--            android:id="@+id/Chats"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginLeft="@dimen/_8sdp"-->
+    <!--            android:maxLines="1"-->
+    <!--            android:paddingTop="@dimen/_2sdp"-->
+    <!--            android:text="Chats"-->
+    <!--            android:textColor="@color/black"-->
+    <!--            android:textSize="@dimen/_12ssp"-->
+    <!--            android:textStyle="normal"-->
+    <!--            app:layout_constraintHorizontal_bias="0.0"-->
+    <!--            app:layout_constraintStart_toEndOf="@id/ChatI"-->
+    <!--            app:layout_constraintTop_toTopOf="parent" />-->
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/Theme"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginLeft="@dimen/_8sdp"-->
+    <!--            android:layout_marginRight="@dimen/_5sdp"-->
+    <!--            android:maxLines="1"-->
+    <!--            android:paddingTop="@dimen/_4sdp"-->
+    <!--            android:paddingBottom="@dimen/_2sdp"-->
+    <!--            android:text="Theme, wallpaper, chat history"-->
+    <!--            android:textColor="@color/black"-->
+    <!--            android:textSize="@dimen/_10ssp"-->
+    <!--            app:layout_constraintHorizontal_bias="0.0"-->
+    <!--            app:layout_constraintStart_toEndOf="@id/ChatI"-->
+    <!--            app:layout_constraintTop_toBottomOf="@id/Chats" />-->
+
+    <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

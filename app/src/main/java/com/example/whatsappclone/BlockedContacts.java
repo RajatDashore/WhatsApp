@@ -1,4 +1,4 @@
-package com.example.whatsappclone;
+/*package com.example.whatsappclone;
 
 import android.os.Bundle;
 
@@ -47,3 +47,4 @@ public class BlockedContacts extends AppCompatActivity {
         blockedRecyView.setLayoutManager(lm);
     }
 }
+*/

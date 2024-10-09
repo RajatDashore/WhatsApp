@@ -10,23 +10,23 @@
     app:layout_constraintTop_toTopOf="parent">
 
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="@dimen/_50sdp"
-        android:layout_height="@dimen/_50sdp"
-        android:layout_centerInParent="true"
-        android:background="@drawable/pro_picture_bg"
-        android:padding="6dp"
-        android:src="@drawable/person" />
+    <!--    <de.hdodenhof.circleimageview.CircleImageView-->
+    <!--        android:layout_width="@dimen/_50sdp"-->
+    <!--        android:layout_height="@dimen/_50sdp"-->
+    <!--        android:layout_centerInParent="true"-->
+    <!--        android:background="@drawable/pro_picture_bg"-->
+    <!--        android:padding="6dp"-->
+    <!--        android:src="@drawable/person" />-->
 
-    <com.devlomi.circularstatusview.CircularStatusView
-        android:id="@+id/circular_status_view"
-        android:layout_width="@dimen/_70sdp"
-        android:layout_height="@dimen/_70sdp"
-        android:layout_centerInParent="true"
-        app:portion_color="@color/design_default_color_primary"
-        app:portion_spacing="4dp"
-        app:portion_width="4dp"
-        app:portions_count="10" />
+    <!--    <com.devlomi.circularstatusview.CircularStatusView-->
+    <!--        android:id="@+id/circular_status_view"-->
+    <!--        android:layout_width="@dimen/_70sdp"-->
+    <!--        android:layout_height="@dimen/_70sdp"-->
+    <!--        android:layout_centerInParent="true"-->
+    <!--        app:portion_color="@color/design_default_color_primary"-->
+    <!--        app:portion_spacing="4dp"-->
+    <!--        app:portion_width="4dp"-->
+    <!--        app:portions_count="10" />-->
 
 
 </RelativeLayout>

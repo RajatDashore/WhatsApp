@@ -6,9 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.whatsappclone.Fragments.CallsFragments;
 import com.example.whatsappclone.Fragments.ChatsFragments;
-import com.example.whatsappclone.Fragments.StatusFragment;
 
 public class FragmentAdapter extends FragmentPagerAdapter {
 
@@ -24,12 +22,12 @@ public class FragmentAdapter extends FragmentPagerAdapter {
         if (position == 0) {
             title = "Chat";
         }
-        if (position == 1) {
+        /*if (position == 1) {
             title = "Status";
         }
         if (position == 2) {
             title = "Calls";
-        }
+        } */
         return title;
     }
 
@@ -41,10 +39,10 @@ public class FragmentAdapter extends FragmentPagerAdapter {
         switch (position) {
             case 0:
                 return new ChatsFragments();
-            case 1:
-                return new StatusFragment();
-            case 2:
-                return new CallsFragments();
+//            case 1:
+//                return new StatusFragment();
+//            case 2:
+//                return new CallsFragments();
             default:
                 return new ChatsFragments();
         }
@@ -52,6 +50,6 @@ public class FragmentAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 1;
     }
 }

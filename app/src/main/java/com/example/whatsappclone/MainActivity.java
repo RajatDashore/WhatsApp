@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -15,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.whatsappclone.Adapters.FragmentAdapter;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -47,13 +45,16 @@ public class MainActivity extends AppCompatActivity {
             startActivity(i);
             finish();
         }
-        FloatingActionButton ftButton = findViewById(R.id.floatButton);
+
+
+      /*  FloatingActionButton ftButton = findViewById(R.id.floatButton);
         ftButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "Working on it", Toast.LENGTH_SHORT).show();
             }
         });
+       */
 
     }
 

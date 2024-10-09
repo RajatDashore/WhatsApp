@@ -1,4 +1,4 @@
-package com.example.whatsappclone.Fragments;
+/*package com.example.whatsappclone.Fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -32,7 +32,7 @@ public class CallsFragments extends Fragment {
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
      * @return A new instance of fragment CallsFragments.
-     */
+
     // TODO: Rename and change types and number of parameters
     public static CallsFragments newInstance(String param1, String param2) {
         CallsFragments fragment = new CallsFragments();
@@ -59,3 +59,4 @@ public class CallsFragments extends Fragment {
         return inflater.inflate(R.layout.fragment_calls_fragments, container, false);
     }
 }
+*/

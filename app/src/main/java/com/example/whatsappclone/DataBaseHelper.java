@@ -1,3 +1,4 @@
+/*
 package com.example.whatsappclone;
 
 
@@ -65,3 +66,4 @@ public class DataBaseHelper implements Serializable {
         Email = email;
     }
 }
+*/

@@ -42,8 +42,9 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_30sdp"
         android:layout_marginTop="@dimen/_20sdp"
         android:gravity="center"
         android:text="Register"
@@ -61,7 +62,10 @@
         android:id="@+id/edtUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_25sdp"
         android:background="@drawable/edttxt_bg"
+        android:drawableLeft="@drawable/baseline_person_24"
+        android:drawablePadding="@dimen/_5sdp"
         android:ems="14"
         android:hint="@string/enter_name"
         android:inputType="textPersonName"
@@ -79,7 +83,10 @@
         android:id="@+id/edtEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_25sdp"
         android:background="@drawable/edttxt_bg"
+        android:drawableLeft="@drawable/baseline_email_24"
+        android:drawablePadding="@dimen/_5sdp"
         android:ellipsize="end"
         android:ems="14"
         android:hint="@string/e_mail"
@@ -97,9 +104,11 @@
         android:id="@+id/edtPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:layout_marginTop="@dimen/_25sdp"
         android:autofillHints=""
         android:background="@drawable/edttxt_bg"
+        android:drawableLeft="@drawable/baseline_password_24"
+        android:drawablePadding="@dimen/_5sdp"
         android:ellipsize="end"
         android:ems="14"
         android:hint="@string/password"
@@ -131,73 +140,73 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="@dimen/_25sdp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/signup_grad_btn"
         android:text="@string/sign_up"
         android:textColor="#fff"
         android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@id/linearLayout"
         app:layout_constraintEnd_toEndOf="@+id/edtPassword"
         app:layout_constraintStart_toStartOf="@+id/edtPassword"
         app:layout_constraintTop_toBottomOf="@id/edtPassword" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        style="?android:attr/buttonBarButtonStyle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@id/textSignUpPhone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnSignUp">
+    <!--    <LinearLayout-->
+    <!--        android:id="@+id/linearLayout"-->
+    <!--        style="?android:attr/buttonBarButtonStyle"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginBottom="24dp"-->
+    <!--        android:gravity="center"-->
+    <!--        android:orientation="horizontal"-->
+    <!--        app:layout_constraintBottom_toTopOf="@id/textSignUpPhone"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/btnSignUp">-->
 
-        <Button
-            android:id="@+id/btnGoogle"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_20sdp"
-            android:layout_marginEnd="@dimen/_30sdp"
-            android:layout_weight="1"
-            android:background="@drawable/google_login_btn"
-            android:drawableStart="@drawable/google_g_icon"
-            android:padding="@dimen/_5sdp"
-            android:text="@string/google"
-            android:textAllCaps="false"
-            android:textColor="#040404"
-            android:textSize="@dimen/_12ssp" />
+    <!--        <Button-->
+    <!--            android:id="@+id/btnGoogle"-->
+    <!--            style="?android:attr/buttonBarButtonStyle"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginStart="@dimen/_20sdp"-->
+    <!--            android:layout_marginEnd="@dimen/_30sdp"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:background="@drawable/google_login_btn"-->
+    <!--            android:drawableStart="@drawable/google_g_icon"-->
+    <!--            android:padding="@dimen/_5sdp"-->
+    <!--            android:text="@string/google"-->
+    <!--            android:textAllCaps="false"-->
+    <!--            android:textColor="#040404"-->
+    <!--            android:textSize="@dimen/_12ssp" />-->
 
-        <Button
-            android:id="@+id/btnFacebook"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/_20sdp"
-            android:layout_weight="1"
-            android:background="@drawable/face_btn_grad"
-            android:drawableStart="@drawable/facebook_logo"
-            android:padding="5dp"
-            android:text="@string/facebook"
-            android:textAllCaps="false"
-            android:textColor="#fff"
-            android:textSize="@dimen/_12ssp" />
+    <!--        <Button-->
+    <!--            android:id="@+id/btnFacebook"-->
+    <!--            style="?android:attr/buttonBarButtonStyle"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginEnd="@dimen/_20sdp"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:background="@drawable/face_btn_grad"-->
+    <!--            android:drawableStart="@drawable/facebook_logo"-->
+    <!--            android:padding="5dp"-->
+    <!--            android:text="@string/facebook"-->
+    <!--            android:textAllCaps="false"-->
+    <!--            android:textColor="#fff"-->
+    <!--            android:textSize="@dimen/_12ssp" />-->
 
-    </LinearLayout>
+    <!--    </LinearLayout>-->
 
-    <TextView
-        android:id="@+id/textSignUpPhone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:text="@string/sign_up_with_phone"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/linearLayout" />
+    <!--    <TextView-->
+    <!--        android:id="@+id/textSignUpPhone"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginBottom="24dp"-->
+    <!--        android:text="@string/sign_up_with_phone"-->
+    <!--        android:textColor="@color/black"-->
+    <!--        android:textSize="18sp"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/linearLayout" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

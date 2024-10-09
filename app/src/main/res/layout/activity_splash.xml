@@ -23,33 +23,34 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginBottom="2dp"
         android:gravity="center"
         android:text="Chatter"
         android:textColor="@color/black"
-        android:textSize="@dimen/_12ssp"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+        android:textSize="@dimen/_16ssp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/WhatsLogo"
         app:layout_constraintVertical_bias="1.0" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:drawableLeft="@drawable/meta_svg"
-        android:fontFamily="sans-serif-thin"
-        android:gravity="center"
-        android:paddingRight="2dp"
-        android:text=" Chat to peaple"
-        android:textColor="#25d366"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+    <!--    <TextView-->
+    <!--        android:id="@+id/textView"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginBottom="30dp"-->
+    <!--        android:drawableLeft="@drawable/meta_svg"-->
+    <!--        android:fontFamily="sans-serif-thin"-->
+    <!--        android:gravity="center"-->
+    <!--        android:paddingRight="2dp"-->
+    <!--        android:text=" Chat to peaple"-->
+    <!--        android:textColor="#25d366"-->
+    <!--        android:textSize="18sp"-->
+    <!--        android:textStyle="bold"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

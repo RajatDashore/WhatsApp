@@ -1,4 +1,7 @@
+/*
+
 package com.example.whatsappclone.Adapters;
+
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -69,7 +72,7 @@ public class TopStatusAdapter extends RecyclerView.Adapter<TopStatusAdapter.View
 // Must be called before calling show method
 
             }
-        }); */
+        });
 
     }
 
@@ -87,3 +90,4 @@ public class TopStatusAdapter extends RecyclerView.Adapter<TopStatusAdapter.View
         }
     }
 }
+*/

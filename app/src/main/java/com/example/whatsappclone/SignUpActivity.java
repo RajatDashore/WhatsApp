@@ -48,7 +48,7 @@ public class SignUpActivity extends AppCompatActivity {
         passWord = findViewById(R.id.edtPassword);
         progressBar = findViewById(R.id.progressBar);
         TextView txtSignIn = findViewById(R.id.txtSignIn);
-        Button btnGoogle = findViewById(R.id.btnGoogle);
+        //  Button btnGoogle = findViewById(R.id.btnGoogle);
         signInClient = Identity.getSignInClient(this);
         getSupportActionBar().hide();
 
@@ -116,12 +116,13 @@ public class SignUpActivity extends AppCompatActivity {
         });
 
 
-        btnGoogle.setOnClickListener(new View.OnClickListener() {
+     /*   btnGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //signIn();
             }
         });
+      */
 
     }
 

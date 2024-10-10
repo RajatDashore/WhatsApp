@@ -64,44 +64,44 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="HardcodedText" />
 
-            <ImageView
-                android:id="@+id/imageView5"
-                android:layout_width="@dimen/_15sdp"
-                android:layout_height="@dimen/_15sdp"
-                android:layout_marginEnd="@dimen/_15sdp"
-                android:contentDescription="TODO"
-                android:src="@drawable/baseline_call_24"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/imageView3"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="ContentDescription,HardcodedText" />
+            <!--            <ImageView-->
+            <!--                android:id="@+id/imageView5"-->
+            <!--                android:layout_width="@dimen/_15sdp"-->
+            <!--                android:layout_height="@dimen/_15sdp"-->
+            <!--                android:layout_marginEnd="@dimen/_15sdp"-->
+            <!--                android:contentDescription="TODO"-->
+            <!--                android:src="@drawable/baseline_call_24"-->
+            <!--                android:visibility="visible"-->
+            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                app:layout_constraintEnd_toStartOf="@+id/imageView3"-->
+            <!--                app:layout_constraintTop_toTopOf="parent"-->
+            <!--                tools:ignore="ContentDescription,HardcodedText" />-->
 
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="@dimen/_15sdp"
-                android:layout_height="@dimen/_15sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:contentDescription="@string/ggug"
-                android:src="@drawable/vertical_three_dots_svg"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5"
-                tools:ignore="ContentDescription" />
+            <!--            <ImageView-->
+            <!--                android:id="@+id/imageView3"-->
+            <!--                android:layout_width="@dimen/_15sdp"-->
+            <!--                android:layout_height="@dimen/_15sdp"-->
+            <!--                android:layout_marginEnd="@dimen/_10sdp"-->
+            <!--                android:contentDescription="@string/ggug"-->
+            <!--                android:src="@drawable/vertical_three_dots_svg"-->
+            <!--                android:visibility="visible"-->
+            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintTop_toTopOf="parent"-->
+            <!--                app:layout_constraintVertical_bias="0.5"-->
+            <!--                tools:ignore="ContentDescription" />-->
 
-            <ImageView
-                android:id="@+id/videoCall"
-                android:layout_width="@dimen/_15sdp"
-                android:layout_height="@dimen/_15sdp"
-                android:layout_marginEnd="@dimen/_15sdp"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/imageView5"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/video_call_svg"
-                tools:ignore="ContentDescription" />
+            <!--            <ImageView-->
+            <!--                android:id="@+id/videoCall"-->
+            <!--                android:layout_width="@dimen/_15sdp"-->
+            <!--                android:layout_height="@dimen/_15sdp"-->
+            <!--                android:layout_marginEnd="@dimen/_15sdp"-->
+            <!--                android:visibility="visible"-->
+            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                app:layout_constraintEnd_toStartOf="@+id/imageView5"-->
+            <!--                app:layout_constraintTop_toTopOf="parent"-->
+            <!--                app:srcCompat="@drawable/video_call_svg"-->
+            <!--                tools:ignore="ContentDescription" />-->
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -158,7 +158,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_3sdp"
                 android:background="@color/white"
-                android:ems="6"
+                android:ems="10"
                 android:hint="Message"
                 android:inputType="textMultiLine|textAutoComplete|textAutoCorrect"
                 android:maxLines="5"
@@ -169,48 +169,48 @@
                 app:layout_constraintVertical_bias="0.5"
                 tools:ignore="HardcodedText,TouchTargetSizeCheck" />
 
-            <ImageView
-                android:id="@+id/imgClip"
-                android:layout_width="@dimen/_18sdp"
-                android:layout_height="@dimen/_18sdp"
-                android:layout_gravity="center"
-                android:src="@drawable/attachment"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/imgDolar"
-                app:layout_constraintStart_toEndOf="@id/edtChatting"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5"
-                tools:ignore="ContentDescription" />
+            <!--            <ImageView-->
+            <!--                android:id="@+id/imgClip"-->
+            <!--                android:layout_width="@dimen/_18sdp"-->
+            <!--                android:layout_height="@dimen/_18sdp"-->
+            <!--                android:layout_gravity="center"-->
+            <!--                android:src="@drawable/attachment"-->
+            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                app:layout_constraintEnd_toStartOf="@id/imgDolar"-->
+            <!--                app:layout_constraintStart_toEndOf="@id/edtChatting"-->
+            <!--                app:layout_constraintTop_toTopOf="parent"-->
+            <!--                app:layout_constraintVertical_bias="0.5"-->
+            <!--                tools:ignore="ContentDescription" />-->
 
-            <ImageView
-                android:id="@+id/imgDolar"
-                android:layout_width="@dimen/_16sdp"
-                android:layout_height="@dimen/_16sdp"
-                android:layout_gravity="center"
-                android:background="@drawable/currency_bg"
-                android:padding="@dimen/_3sdp"
-                android:src="@drawable/baseline_currency_rupee_24"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/imgCamera"
-                app:layout_constraintStart_toEndOf="@id/imgClip"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5"
-                tools:ignore="ContentDescription,ImageContrastCheck" />
+            <!--            <ImageView-->
+            <!--                android:id="@+id/imgDolar"-->
+            <!--                android:layout_width="@dimen/_16sdp"-->
+            <!--                android:layout_height="@dimen/_16sdp"-->
+            <!--                android:layout_gravity="center"-->
+            <!--                android:background="@drawable/currency_bg"-->
+            <!--                android:padding="@dimen/_3sdp"-->
+            <!--                android:src="@drawable/baseline_currency_rupee_24"-->
+            <!--                android:visibility="visible"-->
+            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                app:layout_constraintEnd_toStartOf="@id/imgCamera"-->
+            <!--                app:layout_constraintStart_toEndOf="@id/imgClip"-->
+            <!--                app:layout_constraintTop_toTopOf="parent"-->
+            <!--                app:layout_constraintVertical_bias="0.5"-->
+            <!--                tools:ignore="ContentDescription,ImageContrastCheck" />-->
 
-            <ImageView
-                android:id="@+id/imgCamera"
-                android:layout_width="@dimen/_18sdp"
-                android:layout_height="@dimen/_18sdp"
-                android:layout_gravity="center"
-                android:src="@drawable/baseline_camera_alt_24"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/imgDolar"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5"
-                tools:ignore="ContentDescription,ImageContrastCheck" />
+            <!--            <ImageView-->
+            <!--                android:id="@+id/imgCamera"-->
+            <!--                android:layout_width="@dimen/_18sdp"-->
+            <!--                android:layout_height="@dimen/_18sdp"-->
+            <!--                android:layout_gravity="center"-->
+            <!--                android:src="@drawable/baseline_camera_alt_24"-->
+            <!--                android:visibility="visible"-->
+            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintStart_toEndOf="@id/imgDolar"-->
+            <!--                app:layout_constraintTop_toTopOf="parent"-->
+            <!--                app:layout_constraintVertical_bias="0.5"-->
+            <!--                tools:ignore="ContentDescription,ImageContrastCheck" />-->
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline"
@@ -223,21 +223,21 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        <ImageView
-            android:id="@+id/recording"
-            android:layout_width="@dimen/_35sdp"
-            android:layout_height="@dimen/_35sdp"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:background="@drawable/grad_reco"
-            android:padding="@dimen/_7sdp"
-            android:src="@drawable/baseline_mic_24"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/LL"
-            app:layout_constraintStart_toStartOf="@id/guideline3"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5"
-            tools:ignore="ContentDescription,ImageContrastCheck,VisualLintBounds" />
+        <!--        <ImageView-->
+        <!--            android:id="@+id/recording"-->
+        <!--            android:layout_width="@dimen/_35sdp"-->
+        <!--            android:layout_height="@dimen/_35sdp"-->
+        <!--            android:layout_marginStart="@dimen/_5sdp"-->
+        <!--            android:background="@drawable/grad_reco"-->
+        <!--            android:padding="@dimen/_7sdp"-->
+        <!--            android:src="@drawable/baseline_mic_24"-->
+        <!--            android:visibility="visible"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="@id/LL"-->
+        <!--            app:layout_constraintStart_toStartOf="@id/guideline3"-->
+        <!--            app:layout_constraintTop_toTopOf="parent"-->
+        <!--            app:layout_constraintVertical_bias="0.5"-->
+        <!--            tools:ignore="ContentDescription,ImageContrastCheck,VisualLintBounds" />-->
 
 
         <ImageView
@@ -248,7 +248,7 @@
             android:background="@drawable/grad_reco"
             android:padding="@dimen/_7sdp"
             android:src="@drawable/baseline_done_24"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/LL"
             app:layout_constraintStart_toStartOf="@id/guideline3"

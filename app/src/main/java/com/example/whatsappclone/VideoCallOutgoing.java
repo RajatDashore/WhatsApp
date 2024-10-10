@@ -1,3 +1,4 @@
+/*
 package com.example.whatsappclone;
 
 import android.content.Intent;
@@ -79,4 +80,4 @@ public class VideoCallOutgoing extends AppCompatActivity {
 
 
 
-
+*/

@@ -1,7 +1,6 @@
 package com.example.whatsappclone.Adapters;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -17,8 +16,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.whatsappclone.ChatDetailActivity;
-import com.example.whatsappclone.DataBase;
-import com.example.whatsappclone.DataBaseHelper;
 import com.example.whatsappclone.Modules.Users;
 import com.example.whatsappclone.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,15 +35,15 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.MyViewHolder> {
     private static Context context;
     private final ArrayList<Users> list;
-    private final DataBase database;
-    private final DataBaseHelper helper;
+    // private final DataBase database;
+    // private final DataBaseHelper helper;
     private int lastPosition = -1;
 
-    public UsersAdapter(Context context, ArrayList<Users> list, DataBase database, DataBaseHelper helper) {
+    public UsersAdapter(Context context, ArrayList<Users> list) {
         UsersAdapter.context = context;
         this.list = list;
-        this.database = database;
-        this.helper = helper;
+        //    this.database = database;
+        //  this.helper = helper;
     }
 
     @NonNull
@@ -120,7 +117,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.MyViewHolder
 
         holder.imageView.setOnClickListener(v -> Toast.makeText(context, "Work in Progress", Toast.LENGTH_SHORT).show());
 
-        holder.itemView.setOnLongClickListener(v -> {
+      /*  holder.itemView.setOnLongClickListener(v -> {
             new AlertDialog.Builder(context)
                     .setTitle("Block contact")
                     .setMessage("Do you want to block the user ?")
@@ -131,11 +128,11 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.MyViewHolder
                         notifyItemRangeChanged(position, list.size());
 
                         // Add user to database
-                        helper.setName(users.getUserName());
-                        helper.setUid(users.getUserId());
-                        helper.setEmail(users.getMail());
-                        helper.setImage(users.getProPicture());
-                        database.UserDao().insert(helper);
+//                        helper.setName(users.getUserName());
+//                        helper.setUid(users.getUserId());
+//                        helper.setEmail(users.getMail());
+//                        helper.setImage(users.getProPicture());
+//                        database.UserDao().insert(helper);
 
                         Toast.makeText(context, users.getUserName() + " has been blocked", Toast.LENGTH_SHORT).show();
                     })
@@ -145,7 +142,10 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.MyViewHolder
 
             return true;
         });
+
+       */
     }
+
 
     @Override
     public int getItemCount() {

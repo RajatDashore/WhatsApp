@@ -1,6 +1,5 @@
 package com.example.whatsappclone.Fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,9 +11,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.whatsappclone.Adapters.UsersAdapter;
-import com.example.whatsappclone.BlockedContacts;
-import com.example.whatsappclone.DataBase;
-import com.example.whatsappclone.DataBaseHelper;
 import com.example.whatsappclone.Modules.Users;
 import com.example.whatsappclone.databinding.FragmentChatsFragmentsBinding;
 import com.google.firebase.database.DataSnapshot;
@@ -30,6 +26,7 @@ public class ChatsFragments extends Fragment implements Runnable {
 
     private final ArrayList<Users> list = new ArrayList<>();
     private UsersAdapter usersAdapter;
+    private FirebaseDatabase database;
 
     public ChatsFragments() {
 
@@ -39,17 +36,18 @@ public class ChatsFragments extends Fragment implements Runnable {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         FragmentChatsFragmentsBinding binding = FragmentChatsFragmentsBinding.inflate(inflater, container, false);
-        DataBase database1 = DataBase.getInstance(ChatsFragments.this);
-        final DataBaseHelper helper = new DataBaseHelper();
-        usersAdapter = new UsersAdapter(getContext(), list, database1, helper);
-        Intent i = new Intent(getContext(), BlockedContacts.class);
-        i.putExtra("list", list);
+        //  DataBase database1 = DataBase.getInstance(ChatsFragments.this);
+        //  final DataBaseHelper helper = new DataBaseHelper();
+        usersAdapter = new UsersAdapter(getContext(), list);
+        database = FirebaseDatabase.getInstance();
+        // Intent i = new Intent(getContext(), BlockedContacts.class);
+        // i.putExtra("list", list);
 
-        run();
         binding.chatRecyclerViewFragments.setAdapter(usersAdapter);
         FirebaseDatabase Fdatabase = FirebaseDatabase.getInstance();
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         binding.chatRecyclerViewFragments.setLayoutManager(layoutManager);
+        run();
 
         return binding.getRoot();
 
@@ -58,8 +56,8 @@ public class ChatsFragments extends Fragment implements Runnable {
 
     @Override
     public void run() {
-        FirebaseDatabase Fdatabase = FirebaseDatabase.getInstance();
-        Fdatabase.getReference().child("Users").addValueEventListener(new ValueEventListener() {
+
+        database.getReference().child("Users").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();

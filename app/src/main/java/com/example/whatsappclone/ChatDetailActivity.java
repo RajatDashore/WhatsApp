@@ -1,14 +1,10 @@
 package com.example.whatsappclone;
 
-import static android.content.pm.PackageManager.PERMISSION_GRANTED;
-
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -22,8 +18,6 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -74,12 +68,12 @@ public class ChatDetailActivity extends AppCompatActivity {
         ImageView imgBackArrow = findViewById(R.id.imgBackArrow);
         TextView userName = findViewById(R.id.userName);
         ImageView proPicture = findViewById(R.id.proPicture);
-        recording = findViewById(R.id.recording);
+        // recording = findViewById(R.id.recording);
         send = findViewById(R.id.send);
-        ImageView imgDoller = findViewById(R.id.imgDolar);
-        ImageView imgCamera = findViewById(R.id.imgCamera);
+        // ImageView imgDoller = findViewById(R.id.imgDolar);
+        // ImageView imgCamera = findViewById(R.id.imgCamera);
         chatRecyclerView = findViewById(R.id.chatRecylcerView);
-        ImageView videoCallBtn = findViewById(R.id.videoCall);
+        //  ImageView videoCallBtn = findViewById(R.id.videoCall);
         edtChatting.setBackground(getDrawable(android.R.drawable.screen_background_light_transparent));
 
         final String senderId = auth.getUid();
@@ -88,7 +82,7 @@ public class ChatDetailActivity extends AppCompatActivity {
         String propicture = getIntent().getStringExtra("proPicture");
 
 
-        videoCallBtn.setOnClickListener(v -> Toast.makeText(ChatDetailActivity.this, "Work in progress", Toast.LENGTH_SHORT).show());
+        //videoCallBtn.setOnClickListener(v -> Toast.makeText(ChatDetailActivity.this, "Work in progress", Toast.LENGTH_SHORT).show());
 
 
         userName.setText(username);
@@ -97,8 +91,8 @@ public class ChatDetailActivity extends AppCompatActivity {
         senderNode = FirebaseAuth.getInstance().getUid() + recieveid;
         recieverNode = recieveid + FirebaseAuth.getInstance().getUid();
 
-        ImageView call = findViewById(R.id.imageView5);
-        call.setOnClickListener(v -> Toast.makeText(ChatDetailActivity.this, "Work in progress", Toast.LENGTH_SHORT).show());
+        // ImageView call = findViewById(R.id.imageView5);
+        // call.setOnClickListener(v -> Toast.makeText(ChatDetailActivity.this, "Work in progress", Toast.LENGTH_SHORT).show());
 
 
         final ArrayList<MessageModel> messagesModel = new ArrayList<>();
@@ -160,7 +154,7 @@ public class ChatDetailActivity extends AppCompatActivity {
         imgBackArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ChatDetailActivity.this, MainActivity.class));
+                getOnBackPressedDispatcher().onBackPressed();
                 finish();
             }
         });
@@ -175,19 +169,19 @@ public class ChatDetailActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (!edtChatting.getText().toString().trim().isEmpty()) {
-                    send.setVisibility(View.VISIBLE);
-                    recording.setVisibility(View.GONE);
-                    imgDoller.setVisibility(View.GONE);
-                    imgCamera.setVisibility(View.GONE);
-                    edtChatting.setEms(12);
+                    //send.setVisibility(View.VISIBLE);
+//                    recording.setVisibility(View.GONE);
+//                    imgDoller.setVisibility(View.GONE);
+//                    imgCamera.setVisibility(View.GONE);
+                    // edtChatting.setEms(12);
                     layout.setBackgroundResource(R.drawable.whatsapp_big_bg);
 
                 } else {
-                    send.setVisibility(View.GONE);
-                    recording.setVisibility(View.VISIBLE);
-                    imgDoller.setVisibility(View.VISIBLE);
-                    imgCamera.setVisibility(View.VISIBLE);
-                    edtChatting.setEms(6);
+//                    send.setVisibility(View.GONE);
+//                    recording.setVisibility(View.VISIBLE);
+//                    imgDoller.setVisibility(View.VISIBLE);
+//                    imgCamera.setVisibility(View.VISIBLE);
+                    // edtChatting.setEms(6);
                     layout.setBackgroundResource(R.drawable.whatsapp_orgnl_bg);
                 }
             }
@@ -198,19 +192,19 @@ public class ChatDetailActivity extends AppCompatActivity {
             }
         });
 
-        imgCamera.setOnClickListener(this::CaptureImage);
+        // imgCamera.setOnClickListener(this::CaptureImage);
 
     }
 
 
-    public void CaptureImage(View View) {
-
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
-        } else {
-            Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            launcher.launch(i);
-        }
-    }
+//    public void CaptureImage(View View) {
+//
+//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PERMISSION_GRANTED) {
+//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
+//        } else {
+//            Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//            launcher.launch(i);
+//        }
+//    }
 
 }

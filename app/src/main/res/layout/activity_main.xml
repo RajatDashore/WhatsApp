@@ -7,54 +7,67 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPager"
+    <fragment
+        android:id="@+id/FrameLayout"
+        android:name="com.example.whatsappclone.Fragments.ChatsFragments"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/_56sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5"
-        tools:ignore="SpeakableTextPresentCheck">
+        tools:ignore="InvalidId" />
 
-    </androidx.viewpager.widget.ViewPager>
+    <!--    <androidx.viewpager.widget.ViewPager-->
+    <!--        android:id="@+id/viewPager"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:layout_marginBottom="@dimen/_56sdp"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="0.5"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        app:layout_constraintVertical_bias="0.5"-->
+    <!--        tools:ignore="SpeakableTextPresentCheck">-->
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_56sdp"
-        android:background="@color/white"
-        android:contentDescription="@string/dasda"
-        android:elevation="@dimen/_10sdp"
-        android:padding="@dimen/_5sdp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:tabGravity="fill"
-        app:tabIndicator="@color/black"
-        app:tabMaxWidth="0dp"
-        app:tabMode="fixed"
-        app:tabSelectedTextColor="@color/Lightgreen"
-        app:tabTextColor="@color/black" />
+    <!--    </androidx.viewpager.widget.ViewPager>-->
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatButton"
-        android:layout_width="@dimen/_40sdp"
-        android:layout_height="@dimen/_40sdp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/currency_bg"
-        android:backgroundTint="@color/green"
-        android:importantForAccessibility="no"
-        android:paddingEnd="@dimen/_3sdp"
-        android:src="@drawable/baseline_person_add_24"
-        app:layout_constraintBottom_toTopOf="@id/tabLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        tools:ignore="ImageContrastCheck,RtlSymmetry,SpeakableTextPresentCheck" />
+    <!--    <com.google.android.material.tabs.TabLayout-->
+    <!--        android:id="@+id/tabLayout"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="@dimen/_56sdp"-->
+    <!--        android:background="@color/white"-->
+    <!--        android:contentDescription="@string/dasda"-->
+    <!--        android:elevation="@dimen/_10sdp"-->
+    <!--        android:padding="@dimen/_5sdp"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="0.5"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:tabGravity="fill"-->
+    <!--        app:tabIndicator="@color/black"-->
+    <!--        app:tabMaxWidth="0dp"-->
+    <!--        app:tabMode="fixed"-->
+    <!--        app:tabSelectedTextColor="@color/Lightgreen"-->
+    <!--        app:tabTextColor="@color/black" />-->
+
+    <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+    <!--        android:id="@+id/floatButton"-->
+    <!--        android:layout_width="@dimen/_40sdp"-->
+    <!--        android:layout_height="@dimen/_40sdp"-->
+    <!--        android:layout_marginEnd="10dp"-->
+    <!--        android:layout_marginBottom="10dp"-->
+    <!--        android:background="@drawable/currency_bg"-->
+    <!--        android:backgroundTint="@color/green"-->
+    <!--        android:importantForAccessibility="no"-->
+    <!--        android:paddingEnd="@dimen/_3sdp"-->
+    <!--        android:src="@drawable/baseline_person_add_24"-->
+    <!--        app:layout_constraintBottom_toTopOf="@id/tabLayout"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        app:layout_constraintVertical_bias="1.0"-->
+    <!--        tools:ignore="ImageContrastCheck,RtlSymmetry,SpeakableTextPresentCheck" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

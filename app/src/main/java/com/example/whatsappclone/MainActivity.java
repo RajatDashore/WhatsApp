@@ -11,10 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
 
-import com.example.whatsappclone.Adapters.FragmentAdapter;
-import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -27,14 +24,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ViewPager viewPager = findViewById(R.id.viewPager);
-        viewPager.setAdapter(new FragmentAdapter(getSupportFragmentManager()));
-        TabLayout tabLayout = findViewById(R.id.tabLayout);
-        tabLayout.setupWithViewPager(viewPager);
+        //ViewPager viewPager = findViewById(R.id.viewPager);
+        //viewPager.setAdapter(new FragmentAdapter(getSupportFragmentManager()));
+//        TabLayout tabLayout = findViewById(R.id.tabLayout);
+//        tabLayout.setupWithViewPager(viewPager);
+
+//        Fragment fragment = new ChatsFragments();
+//        loadFragment(new ChatsFragments());
+//        loadFragment(fragment);
+
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        Objects.requireNonNull(tabLayout.getTabAt(0)).setIcon(R.drawable.baseline_chat_24);
-        Objects.requireNonNull(tabLayout.getTabAt(1)).setIcon(R.drawable.search);
-        Objects.requireNonNull(tabLayout.getTabAt(2)).setIcon(R.drawable.baseline_call_24);
+        // Objects.requireNonNull(tabLayout.getTabAt(0)).setIcon(R.drawable.baseline_chat_24);
+//        Objects.requireNonNull(tabLayout.getTabAt(1)).setIcon(R.drawable.search);
+        //      Objects.requireNonNull(tabLayout.getTabAt(2)).setIcon(R.drawable.baseline_call_24);
 
         FirebaseUser user = auth.getCurrentUser();
         Objects.requireNonNull(getSupportActionBar()).setTitle("Chatter");
@@ -58,6 +60,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /*
+        @SuppressLint("ResourceType")
+        private void loadFragment(Fragment fragment) {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.add(ChatsFragments,fragment);
+            transaction.commit();
+        }
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -78,23 +88,20 @@ public class MainActivity extends AppCompatActivity {
             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
             dialog.setCancelable(false);
             dialog.setIcon(R.drawable.baseline_logout_24);
-            dialog.setMessage("Do you want to logout ?")
-                    .setIcon(R.drawable.logout_big)
-                    .setTitle("Logout")
-                    .setPositiveButton("Logout", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            FirebaseAuth.getInstance().signOut();
-                            Intent i = new Intent(MainActivity.this, SignUpActivity.class);
-                            startActivity(i);
-                            finish();
-                        }
-                    }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    }).show();
+            dialog.setMessage("Do you want to logout ?").setIcon(R.drawable.logout_big).setTitle("Logout").setPositiveButton("Logout", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    FirebaseAuth.getInstance().signOut();
+                    Intent i = new Intent(MainActivity.this, SignUpActivity.class);
+                    startActivity(i);
+                    finish();
+                }
+            }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            }).show();
         }
 
         return true;

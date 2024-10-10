@@ -1,11 +1,11 @@
-/*package com.example.whatsappclone
+package com.example.whatsappclone
+
 import android.content.ContentValues.TAG
 import android.util.Log
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.yield
-
 
 
 // This code is not the part of the project but it is how i can implement the coroutins into the project
@@ -36,4 +36,4 @@ private class Coroutine {
         yield()
         Log.d("hello", "Task2 Ending")
     }
-}*/
+}

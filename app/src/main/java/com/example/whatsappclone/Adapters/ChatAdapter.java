@@ -1,11 +1,8 @@
 package com.example.whatsappclone.Adapters;
 
-import static android.icu.text.DateFormat.ABBR_MONTH_DAY;
-
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,27 +17,26 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.whatsappclone.Modules.MessageModel;
 import com.example.whatsappclone.R;
+import com.example.whatsappclone.Utills.TimeConverter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 public class ChatAdapter extends RecyclerView.Adapter {
 
     private final Context context;
     private final ArrayList<MessageModel> list;
     private final int SENDER = 1;
-    private final int RECIEVER = 2;
     private final String RecId;
+    private final TimeConverter tc;
 
 
     public ChatAdapter(String recId, Context context, ArrayList<MessageModel> list) {
         this.RecId = recId;
         this.context = context;
         this.list = list;
+        tc = new TimeConverter();
     }
 
 
@@ -61,7 +57,7 @@ public class ChatAdapter extends RecyclerView.Adapter {
         if (list.get(position).getuID().equals(FirebaseAuth.getInstance().getUid())) {
             return SENDER;
         } else {
-            return RECIEVER;
+            return 2;
         }
     }
 
@@ -73,39 +69,25 @@ public class ChatAdapter extends RecyclerView.Adapter {
         MessageModel model = list.get(position);
         // to delete the chats from the ChatRecyclerView
 
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                new AlertDialog.Builder(context).setIcon(R.drawable.baseline_delete_24)
-                        .setCancelable(false)
-                        .setTitle("Delete the message")
-                        .setMessage("Are you sure you want to delete ?")
-                        .setPositiveButton("Delete for me", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                                String senderID = FirebaseAuth.getInstance().getUid() + RecId;
-                                database.getReference().child("Messages").child(senderID).child(model.getMessageId()).setValue(null);
-                                Toast.makeText(context, "Message has been deleted", Toast.LENGTH_SHORT).show();
-                            }
-                        }).setNegativeButton("Delete for everyone", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                String senderId = FirebaseAuth.getInstance().getUid() + RecId;
-                                String recId = RecId + FirebaseAuth.getInstance().getUid();
-                                FirebaseDatabase.getInstance().getReference().child("Messages").child(senderId).child(model.getMessageId()).setValue(null);
-                                FirebaseDatabase.getInstance().getReference().child("Messages").child(recId).child(model.getMessageId()).setValue(null);
-                                dialog.dismiss();
-                            }
-                        })
-                        .setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        }).show();
-                return false;
-            }
+        holder.itemView.setOnLongClickListener(v -> {
+            new AlertDialog.Builder(context).setIcon(R.drawable.baseline_delete_24)
+                    .setCancelable(false)
+                    .setTitle("Delete the message")
+                    .setMessage("Are you sure you want to delete ?")
+                    .setPositiveButton("Delete for me", (dialog, which) -> {
+                        FirebaseDatabase database = FirebaseDatabase.getInstance();
+                        String senderID = FirebaseAuth.getInstance().getUid() + RecId;
+                        database.getReference().child("Messages").child(senderID).child(model.getMessageId()).setValue(null);
+                        Toast.makeText(context, "Message has been deleted", Toast.LENGTH_SHORT).show();
+                    }).setNegativeButton("Delete for everyone", (dialog, which) -> {
+                        String senderId = FirebaseAuth.getInstance().getUid() + RecId;
+                        String recId = RecId + FirebaseAuth.getInstance().getUid();
+                        FirebaseDatabase.getInstance().getReference().child("Messages").child(senderId).child(model.getMessageId()).setValue(null);
+                        FirebaseDatabase.getInstance().getReference().child("Messages").child(recId).child(model.getMessageId()).setValue(null);
+                        dialog.dismiss();
+                    })
+                    .setNeutralButton("Cancel", (dialog, which) -> dialog.dismiss()).show();
+            return false;
         });
 
         //        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
@@ -162,23 +144,15 @@ public class ChatAdapter extends RecyclerView.Adapter {
 
         if (holder.getClass() == SenderViewHolder.class) {
             ((SenderViewHolder) holder).SenderMSg.setText(model.getMessage());
-            Calendar now = Calendar.getInstance();
-            Date date = new Date(model.getTimeStamp());
-            if (date.getTime() == now.getTimeInMillis()) {
-                @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat(" h:mm aaa");
-                String strDate = dateFormat.format(date);
-                ((SenderViewHolder) holder).STimeStamp.setText(strDate);
-            } else if (now.getTimeInMillis() - date.getTime() == 1) {
-                ((SenderViewHolder) holder).STimeStamp.setText("yesterday");
-            } else if (now.get(Calendar.YEAR) - date.getYear() == 1) {
-                ((SenderViewHolder) holder).STimeStamp.setText("MMMM YYYY");
-            } else if (now.get(Calendar.MONTH) - date.getMonth() == 1) {
-                ((SenderViewHolder) holder).STimeStamp.setText(" d MMMM");
-            } else {
-                @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat(" h:mm aaa");
-                String strDate = dateFormat.format(date);
-                ((SenderViewHolder) holder).STimeStamp.setText(strDate);
-            }
+            String time = tc.timeFormat(model.getTimeStamp());
+            ((SenderViewHolder) holder).STimeStamp.setText(time);
+
+           /* Date date = new Date(model.getTimeStamp());
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat(ABBR_MONTH_DAY + "KK:mm aa");
+            String strDate = dateFormat.format(date);
+            ((SenderViewHolder) holder).STimeStamp.setText(strDate);
+
+            */
 
 //            SenderViewHolder viewHolder = (SenderViewHolder) holder;
 //            viewHolder.itemView.setOnTouchListener((view, event) -> {
@@ -194,10 +168,8 @@ public class ChatAdapter extends RecyclerView.Adapter {
 
         } else {
             ((RecieverViewHolder) holder).RecieverMSg.setText(model.getMessage());
-            Date date = new Date(model.getTimeStamp());
-            @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat(ABBR_MONTH_DAY + " KK:mm aa");
-            String strDate = dateFormat.format(date);
-            ((RecieverViewHolder) holder).rTimeStamp.setText(strDate);
+            String time = tc.timeFormat(model.getTimeStamp());
+            ((RecieverViewHolder) holder).rTimeStamp.setText(time);
 //            RecieverViewHolder viewHolder = (RecieverViewHolder) holder;
 //            viewHolder.itemView.setOnTouchListener((v, event) -> {
 //                popup.onTouch(v, event);

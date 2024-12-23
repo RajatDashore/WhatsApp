@@ -9,4 +9,8 @@
     <string name="lastmessage">lastMessage</string>
     <string name="username">UserName</string>
     <string name="ggug">TODO</string>
+    <string name="please_check_your_internet_connection">check_internet</string>
+    <string name="retry">Retry</string>
+    <string name="name">Name</string>
+    <string name="decline_call">Decline call</string>
 </resources>

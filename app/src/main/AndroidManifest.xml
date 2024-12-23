@@ -3,11 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32"
+        tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission
         android:name="android.permission.CAMERA"
         tools:ignore="PermissionImpliesUnsupportedChromeOsHardware" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission
+        android:name="android.permission.CAPTURE_AUDIO_OUTPUT"
+        tools:ignore="ProtectedPermissions" />
 
     <application
         android:allowBackup="true"
@@ -15,6 +23,7 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/c_1"
         android:label="@string/app_name"
+        android:name=".VideoCall.Utills.MyApplication"
         android:logo="@drawable/c_1"
         android:roundIcon="@drawable/c_1"
         android:supportsRtl="true"
@@ -29,14 +38,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service android:name=".VideoCall.ForgroundService.MainService" />
         <activity
-            android:name=".BlockedContacts"
+            android:name=".VideoCall.VideoCallIncoming"
             android:exported="false" />
+
         <activity
-            android:name=".VideoCallOutgoing"
-            android:exported="false" />
-        <activity
-            android:name=".VideoCallIncoming"
+            android:name=".VideoCall.VideoCallOutgoing"
             android:exported="false" />
         <activity
             android:name=".Settings"

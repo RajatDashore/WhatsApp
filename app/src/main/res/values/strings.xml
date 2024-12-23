@@ -20,4 +20,11 @@
     <string name="lastmessage">lastMessage</string>
     <string name="username">UserName</string>
     <string name="ggug">TODO</string>
+    <string name="accept">Accept</string>
+
+    <string name="incoming_videocall">Incoming videocall</string>
+    <string name="please_check">please_check_your_internet_connection</string>
+    <string name="retry">Retry</string>
+    <string name="name">Name</string>
+    <string name="decline_call">Decline call</string>
 </resources>

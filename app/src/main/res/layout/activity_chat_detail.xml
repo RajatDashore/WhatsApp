@@ -4,15 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/helloWorld"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:background="@drawable/whatsapp_big_bg"
+    android:layout_height="match_parent"
     tools:context=".ChatDetailActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolBar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/sp56"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
         android:background="@color/white">
 
@@ -24,8 +25,8 @@
                 android:id="@+id/imgBackArrow"
                 android:layout_width="@dimen/_20sdp"
                 android:layout_height="@dimen/_20sdp"
-                android:layout_marginEnd="@dimen/_15sdp"
                 android:src="@drawable/back_arrow_svg"
+                android:background="?android:attr/selectableItemBackground"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/proPicture"
                 app:layout_constraintTop_toTopOf="parent"
@@ -35,13 +36,13 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/proPicture"
-                android:layout_width="@dimen/_30sdp"
-                android:layout_height="@dimen/_30sdp"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
                 android:layout_marginStart="@dimen/_7sdp"
                 android:background="@drawable/pro_picture_bg"
                 android:contentDescription="@string/dasda"
-                android:onClick="showUserDetail"
                 android:src="@drawable/person"
+                android:foreground="?android:attr/selectableItemBackground"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imgBackArrow"
                 app:layout_constraintTop_toTopOf="parent"
@@ -54,8 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:gravity="center"
-                android:minHeight="48dp"
-                android:onClick="showUserDetail"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:text="UserName"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14sdp"
@@ -64,44 +64,47 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="HardcodedText" />
 
-            <!--            <ImageView-->
-            <!--                android:id="@+id/imageView5"-->
-            <!--                android:layout_width="@dimen/_15sdp"-->
-            <!--                android:layout_height="@dimen/_15sdp"-->
-            <!--                android:layout_marginEnd="@dimen/_15sdp"-->
-            <!--                android:contentDescription="TODO"-->
-            <!--                android:src="@drawable/baseline_call_24"-->
-            <!--                android:visibility="visible"-->
-            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--                app:layout_constraintEnd_toStartOf="@+id/imageView3"-->
-            <!--                app:layout_constraintTop_toTopOf="parent"-->
-            <!--                tools:ignore="ContentDescription,HardcodedText" />-->
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:background="?android:attr/selectableItemBackground"
+                android:contentDescription="TODO"
+                android:src="@drawable/baseline_call_24"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imageView3"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription,HardcodedText" />
 
-            <!--            <ImageView-->
-            <!--                android:id="@+id/imageView3"-->
-            <!--                android:layout_width="@dimen/_15sdp"-->
-            <!--                android:layout_height="@dimen/_15sdp"-->
-            <!--                android:layout_marginEnd="@dimen/_10sdp"-->
-            <!--                android:contentDescription="@string/ggug"-->
-            <!--                android:src="@drawable/vertical_three_dots_svg"-->
-            <!--                android:visibility="visible"-->
-            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--                app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                app:layout_constraintTop_toTopOf="parent"-->
-            <!--                app:layout_constraintVertical_bias="0.5"-->
-            <!--                tools:ignore="ContentDescription" />-->
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="?android:attr/selectableItemBackground"
+                android:contentDescription="@string/ggug"
+                android:src="@drawable/vertical_three_dots_svg"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5"
+                tools:ignore="ContentDescription" />
 
-            <!--            <ImageView-->
-            <!--                android:id="@+id/videoCall"-->
-            <!--                android:layout_width="@dimen/_15sdp"-->
-            <!--                android:layout_height="@dimen/_15sdp"-->
-            <!--                android:layout_marginEnd="@dimen/_15sdp"-->
-            <!--                android:visibility="visible"-->
-            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--                app:layout_constraintEnd_toStartOf="@+id/imageView5"-->
-            <!--                app:layout_constraintTop_toTopOf="parent"-->
-            <!--                app:srcCompat="@drawable/video_call_svg"-->
-            <!--                tools:ignore="ContentDescription" />-->
+            <ImageView
+                android:id="@+id/videoCall"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:background="?android:attr/selectableItemBackground"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imageView5"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/video_call_svg"
+                tools:ignore="ContentDescription" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -109,12 +112,21 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/chatRecylcerView"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/LL"
-        android:layout_below="@id/toolBar" />
+        android:layout_below="@+id/toolBar"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:fillViewport="true">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/chatRecylcerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+    </ScrollView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/LL"
@@ -143,6 +155,7 @@
                 android:layout_width="@dimen/_22sdp"
                 android:layout_height="@dimen/_22sdp"
                 android:layout_marginStart="5dp"
+                android:background="?android:attr/selectableItemBackground"
                 android:src="@drawable/emoji"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/guideline"
@@ -157,9 +170,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_3sdp"
-                android:background="@color/white"
-                android:ems="10"
+                android:background="@android:color/transparent"
                 android:hint="Message"
+                android:ems="8"
                 android:inputType="textMultiLine|textAutoComplete|textAutoCorrect"
                 android:maxLines="5"
                 android:padding="@dimen/_6sdp"
@@ -169,48 +182,50 @@
                 app:layout_constraintVertical_bias="0.5"
                 tools:ignore="HardcodedText,TouchTargetSizeCheck" />
 
-            <!--            <ImageView-->
-            <!--                android:id="@+id/imgClip"-->
-            <!--                android:layout_width="@dimen/_18sdp"-->
-            <!--                android:layout_height="@dimen/_18sdp"-->
-            <!--                android:layout_gravity="center"-->
-            <!--                android:src="@drawable/attachment"-->
-            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--                app:layout_constraintEnd_toStartOf="@id/imgDolar"-->
-            <!--                app:layout_constraintStart_toEndOf="@id/edtChatting"-->
-            <!--                app:layout_constraintTop_toTopOf="parent"-->
-            <!--                app:layout_constraintVertical_bias="0.5"-->
-            <!--                tools:ignore="ContentDescription" />-->
+            <ImageView
+                android:id="@+id/imgClip"
+                android:layout_width="@dimen/_18sdp"
+                android:layout_height="@dimen/_18sdp"
+                android:layout_gravity="center"
+                android:background="?android:attr/selectableItemBackground"
+                android:src="@drawable/attachment"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/imgDolar"
+                app:layout_constraintStart_toEndOf="@id/edtChatting"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5"
+                tools:ignore="ContentDescription" />
 
-            <!--            <ImageView-->
-            <!--                android:id="@+id/imgDolar"-->
-            <!--                android:layout_width="@dimen/_16sdp"-->
-            <!--                android:layout_height="@dimen/_16sdp"-->
-            <!--                android:layout_gravity="center"-->
-            <!--                android:background="@drawable/currency_bg"-->
-            <!--                android:padding="@dimen/_3sdp"-->
-            <!--                android:src="@drawable/baseline_currency_rupee_24"-->
-            <!--                android:visibility="visible"-->
-            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--                app:layout_constraintEnd_toStartOf="@id/imgCamera"-->
-            <!--                app:layout_constraintStart_toEndOf="@id/imgClip"-->
-            <!--                app:layout_constraintTop_toTopOf="parent"-->
-            <!--                app:layout_constraintVertical_bias="0.5"-->
-            <!--                tools:ignore="ContentDescription,ImageContrastCheck" />-->
+            <ImageView
+                android:id="@+id/imgDolar"
+                android:layout_width="@dimen/_16sdp"
+                android:layout_height="@dimen/_16sdp"
+                android:layout_gravity="center"
+                android:background="@drawable/currency_bg"
+                android:padding="@dimen/_3sdp"
+                android:src="@drawable/baseline_currency_rupee_24"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/imgCamera"
+                app:layout_constraintStart_toEndOf="@id/imgClip"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5"
+                tools:ignore="ContentDescription,ImageContrastCheck" />
 
-            <!--            <ImageView-->
-            <!--                android:id="@+id/imgCamera"-->
-            <!--                android:layout_width="@dimen/_18sdp"-->
-            <!--                android:layout_height="@dimen/_18sdp"-->
-            <!--                android:layout_gravity="center"-->
-            <!--                android:src="@drawable/baseline_camera_alt_24"-->
-            <!--                android:visibility="visible"-->
-            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--                app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                app:layout_constraintStart_toEndOf="@id/imgDolar"-->
-            <!--                app:layout_constraintTop_toTopOf="parent"-->
-            <!--                app:layout_constraintVertical_bias="0.5"-->
-            <!--                tools:ignore="ContentDescription,ImageContrastCheck" />-->
+            <ImageView
+                android:id="@+id/imgCamera"
+                android:layout_width="@dimen/_18sdp"
+                android:layout_height="@dimen/_18sdp"
+                android:layout_gravity="center"
+                android:background="?android:attr/selectableItemBackground"
+                android:src="@drawable/baseline_camera_alt_24"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/imgDolar"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5"
+                tools:ignore="ContentDescription,ImageContrastCheck" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline"
@@ -246,6 +261,7 @@
             android:layout_height="@dimen/_35sdp"
             android:layout_marginStart="@dimen/_5sdp"
             android:background="@drawable/grad_reco"
+            android:foreground="?android:attr/selectableItemBackground"
             android:padding="@dimen/_7sdp"
             android:src="@drawable/baseline_done_24"
             android:visibility="visible"

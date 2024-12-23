@@ -1,27 +1,23 @@
-/*
-package com.example.whatsappclone;
+package com.example.whatsappclone.VideoCall;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.whatsappclone.Modules.Users;
+import com.example.whatsappclone.R;
+import com.example.whatsappclone.VideoCall.ForgroundService.MainServiceRepository;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
+
+import javax.inject.Inject;
 
 public class VideoCallOutgoing extends AppCompatActivity {
     private ImageView imageView;
@@ -29,7 +25,8 @@ public class VideoCallOutgoing extends AppCompatActivity {
     private TextView TvName;
     private String RecieverName, RecieverToken, ReciverUrl, RecieverUid;
     private FirebaseDatabase database;
-
+    @Inject
+    private MainServiceRepository mainServiceRepository;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,14 +41,14 @@ public class VideoCallOutgoing extends AppCompatActivity {
             declineBtn = findViewById(R.id.decline_VideoOut);
             database = FirebaseDatabase.getInstance();
             Users users = new Users();
-
             Intent i = getIntent();
             RecieverUid = i.getStringExtra("Uid");
             RecieverName = i.getStringExtra("Name");
             proPicture = i.getStringExtra("ProPicture");
+             startservice();
 
             String finalProPicture = proPicture;
-            database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid())
+          /*  database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid())
                     .addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -70,9 +67,16 @@ public class VideoCallOutgoing extends AppCompatActivity {
 
                         }
                     });
+           */
+
 
             return insets;
         });
+    }
+
+
+    private void startservice() {
+        mainServiceRepository.startService("Rohit Pawar");
     }
 
 
@@ -80,4 +84,3 @@ public class VideoCallOutgoing extends AppCompatActivity {
 
 
 
-*/

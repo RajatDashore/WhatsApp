@@ -1,5 +1,6 @@
 package com.example.whatsappclone.Fragments;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.whatsappclone.Adapters.UsersAdapter;
 import com.example.whatsappclone.Modules.Users;
+import com.example.whatsappclone.Utills.NoInternet;
+import com.example.whatsappclone.Utills.NoInternetDialog;
 import com.example.whatsappclone.databinding.FragmentChatsFragmentsBinding;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -43,6 +46,11 @@ public class ChatsFragments extends Fragment implements Runnable {
         // Intent i = new Intent(getContext(), BlockedContacts.class);
         // i.putExtra("list", list);
 
+        if (!NoInternet.isNetworkAvailable(requireContext())) {
+            NoInternetDialog.showNoInternetDialog(getContext());
+        }
+
+
         binding.chatRecyclerViewFragments.setAdapter(usersAdapter);
         FirebaseDatabase Fdatabase = FirebaseDatabase.getInstance();
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -58,6 +66,7 @@ public class ChatsFragments extends Fragment implements Runnable {
     public void run() {
 
         database.getReference().child("Users").addValueEventListener(new ValueEventListener() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();

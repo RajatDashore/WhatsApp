@@ -10,5 +10,6 @@
     <color name="grey">#BDBDBD</color>
     <color name="green">#03F668</color>
     <color name="Lightgreen">#25d366</color>
+    <color name="red">#F40606</color>
     <color name="tealLightGreen">#075E54</color>
 </resources>
